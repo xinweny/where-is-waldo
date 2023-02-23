@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function AdminLoginPage({ handleSignIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   return (
     <main className="admin-login-page">
@@ -23,6 +26,7 @@ function AdminLoginPage({ handleSignIn }) {
           onClick={(e) => {
             e.preventDefault();
             handleSignIn(email, password);
+            navigate('/', { replace: true });
           }}
         >
           Sign in
