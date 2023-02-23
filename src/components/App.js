@@ -8,9 +8,7 @@ function App() {
   return (
     <div className="app">
       <Header /> 
-      <main>
-        <LevelSelectPage />
-      </main>     
+      <LevelSelectPage />     
       <Footer />
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 
 function LevelSelectPage() {
 	return (
-		<div className="level-select-page"></div>
+		<main className="level-select-page"></main>
 	);
 }
 
