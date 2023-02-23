@@ -9,6 +9,7 @@ import LevelPage from '../pages/LevelPage';
 import LeaderboardPage from '../pages/LeaderboardPage';
 import CreateLevelPage from '../pages/CreateLevelPage';
 import EditLevelPage from '../pages/EditLevelPage';
+import AdminLoginPage from '../pages/AdminLoginPage';
 import AdminRoute from './AdminRoute';
 
 function RouteSwitch({ isAdmin }) {
@@ -17,6 +18,7 @@ function RouteSwitch({ isAdmin }) {
 			<Header />
 			<Routes>
 				<Route path="/" element={<LevelSelectPage />} />
+				<Route path="/login" element={<AdminLoginPage />} />
 				<Route path="/level/create"
 					element={
 						<AdminRoute isAdmin={isAdmin}>
