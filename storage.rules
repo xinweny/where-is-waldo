@@ -4,7 +4,7 @@ service firebase.storage {
 	match /b/{bucket}/o {
 		match /{allPaths=**} {
 			allow read;
-			allow write, update, delete; if false;
+			allow write, update, delete: if false;
 		}
 	}
 }
