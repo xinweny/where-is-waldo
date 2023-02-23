@@ -20,13 +20,13 @@ function App() {
 
   const handleSignOut = () => {
     signOut(auth)
-    .then(() => {
-      setAdmin(null);
-      console.log('Sign out successful.');
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then(() => {
+        setAdmin(null);
+        console.log('Sign out successful.');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
