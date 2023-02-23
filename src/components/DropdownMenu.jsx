@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function AdminDropdownMenu({ children }) {
+function DropdownMenu({ children }) {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
@@ -15,4 +15,4 @@ function AdminDropdownMenu({ children }) {
   );
 }
 
-export default AdminDropdownMenu;
+export default DropdownMenu;

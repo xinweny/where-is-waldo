@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import AdminDropdownMenu from './AdminDropdownMenu';
+import DropdownMenu from './DropdownMenu';
 
 function Header({ isAdmin, handleSignOut }) {
   return (
@@ -9,10 +9,10 @@ function Header({ isAdmin, handleSignOut }) {
       <h1><Link to="/">Hidden in Plain Sight</Link></h1>
       <nav>
         <li><Link to="/leaderboard">Leaderboard</Link></li>
-        <AdminDropdownMenu>
+        <DropdownMenu>
           {isAdmin ? null : <Link to="/login">Admin</Link>}
           {isAdmin ? (<button type="button" onClick={handleSignOut}>Sign Out</button>) : null}
-        </AdminDropdownMenu>
+        </DropdownMenu>
       </nav>
     </header>
   );
