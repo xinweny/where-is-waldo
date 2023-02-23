@@ -12,13 +12,15 @@ import EditLevelPage from '../pages/EditLevelPage';
 import AdminLoginPage from '../pages/AdminLoginPage';
 import AdminRoute from './AdminRoute';
 
-function RouteSwitch({ isAdmin }) {
+function RouteSwitch({ isAdmin, handleSignIn, handleSignOut }) {
 	return (
 		<BrowserRouter>
-			<Header />
+			<Header isAdmin={isAdmin} handleSignOut={handleSignOut} />
 			<Routes>
+				<Route path="/login" element={
+					<AdminLoginPage handleSignIn={handleSignIn} />
+				} />
 				<Route path="/" element={<LevelSelectPage />} />
-				<Route path="/login" element={<AdminLoginPage />} />
 				<Route path="/level/create"
 					element={
 						<AdminRoute isAdmin={isAdmin}>
