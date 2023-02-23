@@ -1,14 +1,14 @@
 import React from 'react';
 
 import Header from './Header';
-import LevelSelectPage from './LevelSelectPage';
+import LevelSelect from '../pages/LevelSelect';
 import Footer from './Footer';
 
 function App() {
   return (
     <div className="app">
       <Header /> 
-      <LevelSelectPage />     
+      <LevelSelect />     
       <Footer />
     </div>
   );

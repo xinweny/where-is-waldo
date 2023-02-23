@@ -6,6 +6,7 @@ function Header() {
 			<h1>Hidden in Plain Sight</h1>
 			<nav>
 				<a href="">Leaderboard</a>
+				<a href="">Admin</a>
 			</nav>
 		</header>
 	);

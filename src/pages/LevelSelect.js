@@ -1,9 +1,9 @@
 import React from 'react';
 
-function LevelSelectPage() {
+function LevelSelect() {
 	return (
 		<main className="level-select-page"></main>
 	);
 }
 
-export default LevelSelectPage;
+export default LevelSelect;

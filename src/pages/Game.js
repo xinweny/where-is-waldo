@@ -1,8 +1,8 @@
 import React from 'react';
 
-import GamePanel from './GamePanel';
+import GamePanel from '../components/GamePanel';
 
-function GamePage() {
+function Game() {
 	return (
 		<div className="game-page">
 			<GamePanel />
@@ -10,4 +10,4 @@ function GamePage() {
 	);
 }
 
-export default GamePage;
+export default Game;
