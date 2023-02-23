@@ -2,7 +2,7 @@ import React from 'react';
 
 import GamePanel from '../components/GamePanel';
 
-function Game() {
+function LevelPage() {
 	return (
 		<div className="game-page">
 			<GamePanel />
@@ -10,4 +10,4 @@ function Game() {
 	);
 }
 
-export default Game;
+export default LevelPage;

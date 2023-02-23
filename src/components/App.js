@@ -1,15 +1,11 @@
 import React from 'react';
 
-import Header from './Header';
-import LevelSelect from '../pages/LevelSelect';
-import Footer from './Footer';
+import RouteSwitch from './RouteSwitch';
 
 function App() {
   return (
     <div className="app">
-      <Header /> 
-      <LevelSelect />     
-      <Footer />
+      <RouteSwitch />
     </div>
   );
 }
