@@ -8,10 +8,15 @@ function Header({ isAdmin, handleSignOut }) {
     <header>
       <h1><Link to="/">Hidden in Plain Sight</Link></h1>
       <nav>
-        <li><Link to="/leaderboard">Leaderboard</Link></li>
+        <Link to="/leaderboard">Leaderboard</Link>
         <DropdownMenu>
-          {isAdmin ? null : <Link to="/login">Admin</Link>}
-          {isAdmin ? (<button type="button" onClick={handleSignOut}>Sign Out</button>) : null}
+          {isAdmin ? null : <Link to="/login">Admin Login</Link>}
+          {isAdmin ? (
+            <>
+              <Link to="/level/create">Create level</Link>
+              <button type="button" onClick={handleSignOut}>Sign Out</button>
+            </>
+          ) : null}
         </DropdownMenu>
       </nav>
     </header>
