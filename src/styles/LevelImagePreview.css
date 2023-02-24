@@ -2,6 +2,10 @@
 	position: relative;
 }
 
+.level-img {
+	width: 100%;
+}
+
 .target-select {
 	position: absolute;
 	pointer-events: none;

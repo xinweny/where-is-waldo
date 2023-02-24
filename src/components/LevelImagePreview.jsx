@@ -8,21 +8,24 @@ import '../styles/LevelImagePreview.css';
 
 function LevelImagePreview({ imgUrl }) {
   const imgRef = useRef();
+  const originalSizeRef = useRef([0, 0]);
+  const originalStartPosRef = useRef([0, 0]);
+  const originalEndPosRef = useRef([0, 0]);
 
   const [startPos, setStartPos] = useState([0, 0]);
   const [endPos, setEndPos] = useState([0, 0]);
-  const [size, setSize] = useState([0, 0]);
   const [selectSize, setSelectSize] = useState([0, 0]);
   const [isDragging, setIsDragging] = useState(false);
+  const [scale, setScale] = useState([1, 1]);
 
   useEffect(() => {
     const handleResize = () => {
-      setSize([
-        imgRef.current.offsetWidth,
-        imgRef.current.offsetHeight,
-      ]);
+      const newSize = [imgRef.current.offsetWidth, imgRef.current.offsetHeight];
 
-      console.log(size);
+      setScale([
+        newSize[0] / originalSizeRef.current[0],
+        newSize[1] / originalSizeRef.current[1],
+      ]);
     };
 
     window.addEventListener('resize', handleResize);
@@ -30,17 +33,33 @@ function LevelImagePreview({ imgUrl }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => setSelectSize([
-    endPos[0] - startPos[0],
-    endPos[1] - startPos[1],
-  ]), [endPos]);
+  useEffect(() => {
+    originalStartPosRef.current = startPos.map((p, i) => p / scale[i]);
+  }, [startPos]);
 
-  const setRelativePos = (e, setter) => {
+  useEffect(() => {
+    setSelectSize([
+      endPos[0] - startPos[0],
+      endPos[1] - startPos[1],
+    ]);
+    originalEndPosRef.current = endPos.map((p, i) => p / scale[i]);
+  }, [endPos]);
+
+  useEffect(() => {
+    const scalePos = (ref) => ref.current.map((p, i) => p * scale[i]);
+
+    setStartPos(scalePos(originalStartPosRef));
+    setEndPos(scalePos(originalEndPosRef));
+  }, [scale]);
+
+  const convertRelativePos = (e, setter) => {
     const offset = e.target.getBoundingClientRect();
-    setter([
+    const newPos = [
       e.clientX - offset.left,
       e.clientY - offset.top,
-    ]);
+    ];
+
+    setter(newPos);
   };
 
   return (
@@ -51,16 +70,18 @@ function LevelImagePreview({ imgUrl }) {
         src={imgUrl}
         draggable={false}
         alt="Preview"
-        onLoad={() => setSize([
-          imgRef.current.offsetWidth,
-          imgRef.current.offsetHeight,
-        ])}
+        onLoad={() => {
+          originalSizeRef.current = [
+            imgRef.current.offsetWidth,
+            imgRef.current.offsetHeight,
+          ];
+        }}
         onMouseDown={(e) => {
           setIsDragging(true);
-          setRelativePos(e, setStartPos);
-          setRelativePos(e, setEndPos);
+          convertRelativePos(e, setStartPos);
+          convertRelativePos(e, setEndPos);
         }}
-        onMouseMove={(e) => { if (isDragging) setRelativePos(e, setEndPos); }}
+        onMouseMove={(e) => { if (isDragging) convertRelativePos(e, setEndPos); }}
         onMouseUp={() => setIsDragging(false)}
       />
       <div
@@ -70,7 +91,7 @@ function LevelImagePreview({ imgUrl }) {
           height: `${selectSize[1]}px`,
           left: `${startPos[0]}px`,
           top: `${startPos[1]}px`,
-          border: selectSize.every((dim) => dim === 0) ? 'none' : '1px solid black',
+          border: selectSize.every((dim) => dim !== 0) ? '1px solid black' : 'none',
         }}
       />
     </div>
