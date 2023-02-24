@@ -60,6 +60,10 @@ function LevelImagePreview({ imgUrl, setXRange, setYRange }) {
         draggable={false}
         alt="Preview"
         onLoad={() => {
+          setStartPos([0, 0]);
+          setEndPos([0, 0]);
+          setScale([1, 1]);
+
           sizeRef.current = [
             imgRef.current.offsetWidth,
             imgRef.current.offsetHeight,
