@@ -1,0 +1,8 @@
+.level-img-preview {
+	position: relative;
+}
+
+.target-select {
+	position: absolute;
+	pointer-events: none;
+}

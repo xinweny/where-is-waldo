@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import LevelImagePreview from '../components/LevelImagePreview';
+
 function CreateLevelPage() {
   const [imgFile, setImgFile] = useState(undefined);
   const [preview, setPreview] = useState(undefined);
@@ -35,7 +37,7 @@ function CreateLevelPage() {
           />
         </label>
       </form>
-      <img src={preview} alt="Preview" />
+      {preview ? <LevelImagePreview imgUrl={preview} /> : null}
     </main>
   );
 }
