@@ -14,9 +14,9 @@ function LevelImagePreview({ imgUrl }) {
 
   const [startPos, setStartPos] = useState([0, 0]);
   const [endPos, setEndPos] = useState([0, 0]);
-  const [selectSize, setSelectSize] = useState([0, 0]);
   const [isDragging, setIsDragging] = useState(false);
   const [scale, setScale] = useState([1, 1]);
+  const [selectSize, setSelectSize] = useState([0, 0]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,16 +34,16 @@ function LevelImagePreview({ imgUrl }) {
   }, []);
 
   useEffect(() => {
-    originalStartPosRef.current = startPos.map((p, i) => p / scale[i]);
-  }, [startPos]);
+    const unscalePos = (pos) => pos.map((p, i) => p / scale[i]);
 
-  useEffect(() => {
+    originalStartPosRef.current = unscalePos(startPos);
+    originalEndPosRef.current = unscalePos(endPos);
+
     setSelectSize([
-      endPos[0] - startPos[0],
-      endPos[1] - startPos[1],
+      Math.abs(endPos[0] - startPos[0]),
+      Math.abs(endPos[1] - startPos[1]),
     ]);
-    originalEndPosRef.current = endPos.map((p, i) => p / scale[i]);
-  }, [endPos]);
+  }, [startPos, endPos]);
 
   useEffect(() => {
     const scalePos = (ref) => ref.current.map((p, i) => p * scale[i]);
@@ -54,12 +54,35 @@ function LevelImagePreview({ imgUrl }) {
 
   const convertRelativePos = (e, setter) => {
     const offset = e.target.getBoundingClientRect();
+
     const newPos = [
       e.clientX - offset.left,
       e.clientY - offset.top,
     ];
 
     setter(newPos);
+  };
+
+  const styleSelectBox = (start, end, size, sc) => {
+    const style = {
+      width: `${size[0]}px`,
+      height: `${size[1]}px`,
+      border: size.every((dim) => dim !== 0) ? '1px solid black' : 'none',
+    };
+
+    if (end[0] > start[0]) {
+      style.left = `${start[0]}px`;
+    } else {
+      style.right = `${(originalSizeRef.current[0] * sc[0]) - start[0]}px`;
+    }
+
+    if (end[1] > start[1]) {
+      style.top = `${start[1]}px`;
+    } else {
+      style.bottom = `${(originalSizeRef.current[1] * sc[1]) - start[1]}px`;
+    }
+
+    return style;
   };
 
   return (
@@ -86,13 +109,7 @@ function LevelImagePreview({ imgUrl }) {
       />
       <div
         className="target-select"
-        style={{
-          width: `${selectSize[0]}px`,
-          height: `${selectSize[1]}px`,
-          left: `${startPos[0]}px`,
-          top: `${startPos[1]}px`,
-          border: selectSize.every((dim) => dim !== 0) ? '1px solid black' : 'none',
-        }}
+        style={styleSelectBox(startPos, endPos, selectSize, scale)}
       />
     </div>
   );
