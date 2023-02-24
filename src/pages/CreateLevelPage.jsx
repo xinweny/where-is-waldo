@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import LevelImagePreview from '../components/LevelImagePreview';
 
 function CreateLevelPage() {
-  const [imgFile, setImgFile] = useState(undefined);
-  const [preview, setPreview] = useState(undefined);
+  const [imgFile, setImgFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [targetImgFile, setTargetImgFile] = useState(null);
+  const [targets, setTargets] = useState([]);
+  const [xRange, setXRange] = useState([0, 0]);
+  const [yRange, setYRange] = useState([0, 0]);
+
+  const targetNameRef = useRef();
 
   useEffect(() => {
     if (!imgFile) {
@@ -37,7 +43,50 @@ function CreateLevelPage() {
           />
         </label>
       </form>
-      {preview ? <LevelImagePreview imgUrl={preview} /> : null}
+      {preview ? (
+        <div>
+          <form>
+            <label htmlFor="target-name">
+              Target name
+              <input type="text" id="target-name" ref={targetNameRef} />
+            </label>
+            <label htmlFor="target-image">
+              Target Image
+              <input
+                type="file"
+                id="target-image"
+                accept="image/*"
+                multiple={false}
+                required
+                onChange={(e) => setTargetImgFile(e.target.files[0])}
+              />
+            </label>
+            <p>{`x(${xRange})`}</p>
+            <p>{`y(${yRange})`}</p>
+            <button
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                console.log(targets);
+                setTargets((prevTarget) => [...prevTarget, {
+                  name: targetNameRef.current.value,
+                  imgUrl: targetImgFile,
+                  xRange,
+                  yRange,
+                }]);
+              }}
+            >
+              Add
+            </button>
+          </form>
+          <LevelImagePreview
+            imgUrl={preview}
+            setXRange={setXRange}
+            setYRange={setYRange}
+          />
+        </div>
+      )
+        : null}
     </main>
   );
 }
