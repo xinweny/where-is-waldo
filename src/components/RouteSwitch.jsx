@@ -32,7 +32,7 @@ function RouteSwitch({ isAdmin, handleSignIn, handleSignOut }) {
             </AdminRoute>
     )}
         />
-        <Route path="/level/:id" element={<LevelPage />}>
+        <Route path="/levels/:id" element={<LevelPage />}>
           <Route
             path="edit"
             element={(

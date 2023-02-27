@@ -1,0 +1,8 @@
+.game-window {
+	position: relative;
+}
+
+.target-window {
+	position: absolute;
+	display: none;
+}

@@ -6,6 +6,7 @@ import {
   convertRelativePos,
   styleSelectBox,
 } from '../utils/helpers';
+import { useWindowResize } from '../utils/hooks';
 
 import '../styles/LevelImagePreview.css';
 
@@ -24,20 +25,7 @@ function LevelImagePreview({
   const [isDragging, setIsDragging] = useState(false);
   const [scale, setScale] = useState([1, 1]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const newSize = [imgRef.current.offsetWidth, imgRef.current.offsetHeight];
-
-      setScale([
-        newSize[0] / sizeRef.current[0],
-        newSize[1] / sizeRef.current[1],
-      ]);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  useWindowResize(imgRef, sizeRef, setScale);
 
   useEffect(() => {
     startPosRef.current = unscalePos(startPos, scale).map((pos) => Math.round(pos));
@@ -79,10 +67,10 @@ function LevelImagePreview({
         }}
         onMouseDown={(e) => {
           setIsDragging(true);
-          convertRelativePos(e, setStartPos);
-          convertRelativePos(e, setEndPos);
+          setStartPos(convertRelativePos(e));
+          setEndPos(convertRelativePos(e));
         }}
-        onMouseMove={(e) => { if (isDragging) convertRelativePos(e, setEndPos); }}
+        onMouseMove={(e) => { if (isDragging) setEndPos(convertRelativePos(e)); }}
         onMouseUp={() => setIsDragging(false)}
       />
       <div

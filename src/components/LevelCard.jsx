@@ -1,13 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function LevelCard({ level }) {
   return (
     <div className="level-card">
-      <div>
-        <h3>{level.title}</h3>
-        <p>{`Difficulty: ${level.difficulty}`}</p>
-      </div>
       <img src={level.imgUrl} alt={level.title} />
+      <Link to={`levels/${level.id}`} state={{ level }}>
+        <div>
+          <h3>{level.title}</h3>
+          <p>{`Difficulty: ${level.difficulty}`}</p>
+        </div>
+      </Link>
       <div>
         {level.targets.map((target) => (
           <img

@@ -14,4 +14,24 @@ const useImagePreview = (imgFile, setPreview) => {
   }, [imgFile]);
 };
 
-export default useImagePreview;
+const useWindowResize = (imgRef, sizeRef, setScale) => {
+  useEffect(() => {
+    const handleResize = () => {
+      const newSize = [imgRef.current.offsetWidth, imgRef.current.offsetHeight];
+
+      setScale([
+        newSize[0] / sizeRef.current[0],
+        newSize[1] / sizeRef.current[1],
+      ]);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+};
+
+export {
+  useImagePreview,
+  useWindowResize,
+};

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import uniqid from 'uniqid';
 
-import useImagePreview from '../utils/hooks';
+import { useImagePreview } from '../utils/hooks';
 
 function AddTargetForm({
   xRange,

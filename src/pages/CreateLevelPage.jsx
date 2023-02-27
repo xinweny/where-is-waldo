@@ -4,7 +4,7 @@ import { setDoc, doc, Timestamp } from 'firebase/firestore';
 import uniqid from 'uniqid';
 import { useNavigate } from 'react-router-dom';
 
-import useImagePreview from '../utils/hooks';
+import { useImagePreview } from '../utils/hooks';
 import { db, storage } from '../utils/firebase-config';
 
 import LevelPreCreateForm from '../components/LevelPreCreateForm';
