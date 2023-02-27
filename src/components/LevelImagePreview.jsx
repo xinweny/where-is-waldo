@@ -66,12 +66,16 @@ function LevelImagePreview({
         onLoad={() => {
           setStartPos([0, 0]);
           setEndPos([0, 0]);
-          setScale([1, 1]);
 
           sizeRef.current = [
-            imgRef.current.offsetWidth,
-            imgRef.current.offsetHeight,
+            imgRef.current.naturalWidth,
+            imgRef.current.naturalHeight,
           ];
+
+          setScale([
+            imgRef.current.offsetWidth / sizeRef.current[0],
+            imgRef.current.offsetHeight / sizeRef.current[1],
+          ]);
         }}
         onMouseDown={(e) => {
           setIsDragging(true);
@@ -83,7 +87,12 @@ function LevelImagePreview({
       />
       <div
         className="target-select"
-        style={styleSelectBox(startPos, endPos, scale, sizeRef)}
+        style={styleSelectBox(
+          startPosRef.current,
+          endPosRef.current,
+          scale,
+          sizeRef.current,
+        )}
       />
     </div>
   );

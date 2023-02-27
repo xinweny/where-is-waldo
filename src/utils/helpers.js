@@ -13,7 +13,7 @@ export const convertRelativePos = (e, setter) => {
   setter(newPos);
 };
 
-export const styleSelectBox = (start, end, sc, originalSizeRef) => {
+export const styleSelectBox = (start, end, sc, originalSize) => {
   const size = [
     (Math.abs(end[0] - start[0])) * sc[0],
     (Math.abs(end[1] - start[1])) * sc[1],
@@ -26,15 +26,15 @@ export const styleSelectBox = (start, end, sc, originalSizeRef) => {
   };
 
   if (end[0] > start[0]) {
-    style.left = `${start[0]}px`;
+    style.left = `${start[0] * sc[0]}px`;
   } else {
-    style.right = `${(originalSizeRef.current[0] * sc[0]) - start[0]}px`;
+    style.right = `${(originalSize[0] - start[0]) * sc[0]}px`;
   }
 
   if (end[1] > start[1]) {
-    style.top = `${start[1]}px`;
+    style.top = `${start[1] * sc[1]}px`;
   } else {
-    style.bottom = `${(originalSizeRef.current[1] * sc[1]) - start[1]}px`;
+    style.bottom = `${(originalSize[1] - start[1]) * sc[1]}px`;
   }
 
   return style;
