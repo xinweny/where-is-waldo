@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import uniqid from 'uniqid';
 
 import useImagePreview from '../utils/hooks';
 
@@ -8,6 +9,7 @@ function AddTargetForm({
   setXRange,
   setYRange,
   setTargets,
+  levelId,
 }) {
   const targetNameRef = useRef();
   const targetImgFileRef = useRef();
@@ -20,8 +22,35 @@ function AddTargetForm({
   const isSubmissionValid = () => (
     targetNameRef.current.value !== ''
       && targetImgFileRef.current.files.length === 1
-      && (xRange.some((x) => x !== 0) && yRange.some((y) => y !== 0))
+      && xRange.some((x) => x !== 0)
+      && yRange.some((y) => y !== 0)
   );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSubmissionValid()) {
+      setTargets((prevTarget) => {
+        const id = uniqid();
+        const imgUrl = `levels/${levelId}/targets/${id}.${targetImgFile.name.split('.').pop()}`;
+
+        return [...prevTarget, {
+          id,
+          name: targetNameRef.current.value,
+          imgFile: targetImgFile,
+          imgUrl,
+          preview,
+          xRange,
+          yRange,
+        }];
+      });
+
+      targetNameRef.current.value = '';
+      targetImgFileRef.current.value = '';
+      setXRange([0, 0]);
+      setYRange([0, 0]);
+    }
+  };
 
   return (
     <form>
@@ -43,28 +72,7 @@ function AddTargetForm({
       </label>
       <p>{`x(${xRange.join(', ')})`}</p>
       <p>{`y(${yRange.join(', ')})`}</p>
-      <button
-        type="submit"
-        onClick={(e) => {
-          e.preventDefault();
-
-          if (isSubmissionValid()) {
-            setTargets((prevTarget) => [...prevTarget, {
-              name: targetNameRef.current.value,
-              img: preview,
-              xRange,
-              yRange,
-            }]);
-
-            targetNameRef.current.value = '';
-            targetImgFileRef.current.value = '';
-            setXRange([0, 0]);
-            setYRange([0, 0]);
-          }
-        }}
-      >
-        Add
-      </button>
+      <button type="submit" onClick={handleSubmit}>Add</button>
     </form>
   );
 }

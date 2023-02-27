@@ -4,7 +4,7 @@ function TargetPreviewCard({ target }) {
   return (
     <div>
       <p>{target.name}</p>
-      <img src={target.img} alt={target.name} />
+      <img src={target.preview} alt={target.name} />
       <p>{`x${target.xRange}`}</p>
       <p>{`y${target.yRange}`}</p>
     </div>
