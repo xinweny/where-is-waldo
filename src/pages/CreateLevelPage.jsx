@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { ref, uploadBytes } from 'firebase/storage';
 import { setDoc, doc } from 'firebase/firestore';
 import uniqid from 'uniqid';
+import { useNavigate } from 'react-router-dom';
 
 import useImagePreview from '../utils/hooks';
 import { db, storage } from '../utils/firebase-config';
@@ -23,6 +24,11 @@ function CreateLevelPage() {
   const id = useRef(uniqid());
 
   useImagePreview(imgFile, setPreview);
+  const navigate = useNavigate();
+
+  const deleteTarget = (targetId) => {
+    setTargets((prevTargets) => prevTargets.filter((target) => target.id !== targetId));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,6 +62,8 @@ function CreateLevelPage() {
         imgUrl,
         targets: fTargets,
       });
+
+      navigate('/');
     }
   };
 
@@ -70,7 +78,13 @@ function CreateLevelPage() {
         />
         <div>
           <h3>Targets</h3>
-          {targets.map((target) => <TargetPreviewCard key={uniqid()} target={target} />)}
+          {targets.map((target) => (
+            <TargetPreviewCard
+              key={target.id}
+              target={target}
+              handleDelete={deleteTarget}
+            />
+          ))}
         </div>
       </div>
       {preview ? (
