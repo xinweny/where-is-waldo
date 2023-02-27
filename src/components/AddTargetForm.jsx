@@ -1,14 +1,27 @@
 import React, { useRef, useState } from 'react';
 
-import useImagePreview from '../hooks';
+import useImagePreview from '../utils/hooks';
 
-function AddTargetForm({ xRange, yRange, handleSubmit }) {
+function AddTargetForm({
+  xRange,
+  yRange,
+  setXRange,
+  setYRange,
+  setTargets,
+}) {
   const targetNameRef = useRef();
+  const targetImgFileRef = useRef();
 
   const [targetImgFile, setTargetImgFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
   useImagePreview(targetImgFile, setPreview);
+
+  const isSubmissionValid = () => (
+    targetNameRef.current.value !== ''
+      && targetImgFileRef.current.files.length === 1
+      && (xRange.some((x) => x !== 0) && yRange.some((y) => y !== 0))
+  );
 
   return (
     <form>
@@ -21,24 +34,33 @@ function AddTargetForm({ xRange, yRange, handleSubmit }) {
         <input
           type="file"
           id="target-image"
+          ref={targetImgFileRef}
           accept="image/*"
           multiple={false}
           required
           onChange={(e) => setTargetImgFile(e.target.files[0])}
         />
       </label>
-      <p>{`x(${xRange})`}</p>
-      <p>{`y(${yRange})`}</p>
+      <p>{`x(${xRange.join(', ')})`}</p>
+      <p>{`y(${yRange.join(', ')})`}</p>
       <button
         type="submit"
         onClick={(e) => {
           e.preventDefault();
-          handleSubmit((prevTarget) => [...prevTarget, {
-            name: targetNameRef.current.value,
-            img: preview,
-            xRange,
-            yRange,
-          }]);
+
+          if (isSubmissionValid()) {
+            setTargets((prevTarget) => [...prevTarget, {
+              name: targetNameRef.current.value,
+              img: preview,
+              xRange,
+              yRange,
+            }]);
+
+            targetNameRef.current.value = '';
+            targetImgFileRef.current.value = '';
+            setXRange([0, 0]);
+            setYRange([0, 0]);
+          }
         }}
       >
         Add

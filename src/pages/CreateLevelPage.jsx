@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import uniqid from 'uniqid';
 
-import useImagePreview from '../hooks';
+import useImagePreview from '../utils/hooks';
 
 import LevelPreCreateForm from '../components/LevelPreCreateForm';
 import AddTargetForm from '../components/AddTargetForm';
@@ -28,9 +28,17 @@ function CreateLevelPage() {
       </div>
       {preview ? (
         <div>
-          <AddTargetForm xRange={xRange} yRange={yRange} handleSubmit={setTargets} />
+          <AddTargetForm
+            xRange={xRange}
+            yRange={yRange}
+            setXRange={setXRange}
+            setYRange={setYRange}
+            setTargets={setTargets}
+          />
           <LevelImagePreview
             imgUrl={preview}
+            xRange={xRange}
+            yRange={yRange}
             setXRange={setXRange}
             setYRange={setYRange}
           />

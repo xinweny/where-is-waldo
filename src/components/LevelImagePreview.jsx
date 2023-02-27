@@ -5,11 +5,15 @@ import {
   unscalePos,
   convertRelativePos,
   styleSelectBox,
-} from '../utils';
+} from '../utils/helpers';
 
 import '../styles/LevelImagePreview.css';
 
-function LevelImagePreview({ imgUrl, setXRange, setYRange }) {
+function LevelImagePreview({
+  imgUrl,
+  setXRange,
+  setYRange,
+}) {
   const imgRef = useRef();
   const sizeRef = useRef([0, 0]);
   const startPosRef = useRef([0, 0]);

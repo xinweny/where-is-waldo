@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 
-import { auth } from '../firebase-config';
+import { auth } from '../utils/firebase-config';
 
 import RouteSwitch from './RouteSwitch';
 
