@@ -32,13 +32,13 @@ function AddTargetForm({
     if (isSubmissionValid()) {
       setTargets((prevTarget) => {
         const id = uniqid();
-        const imgUrl = `levels/${levelId}/targets/${id}.${targetImgFile.name.split('.').pop()}`;
+        const imgPath = `levels/${levelId}/targets/${id}.${targetImgFile.name.split('.').pop()}`;
 
         return [...prevTarget, {
           id,
           name: targetNameRef.current.value,
           imgFile: targetImgFile,
-          imgUrl,
+          imgPath,
           preview,
           xRange,
           yRange,

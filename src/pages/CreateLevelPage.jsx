@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { ref, uploadBytes } from 'firebase/storage';
-import { setDoc, doc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { setDoc, doc, Timestamp } from 'firebase/firestore';
 import uniqid from 'uniqid';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,33 +34,36 @@ function CreateLevelPage() {
     e.preventDefault();
 
     if (title !== '' && targets.length > 0) {
-      const imgUrl = `levels/${id.current}/${id.current}.${imgFile.name.split('.').pop()}`;
+      const imgPath = `levels/${id.current}/${id.current}.${imgFile.name.split('.').pop()}`;
 
-      const levelImgRef = ref(storage, imgUrl);
+      const levelImgRef = ref(storage, imgPath);
 
       await uploadBytes(levelImgRef, imgFile);
+      const imgUrl = await getDownloadURL(levelImgRef);
 
-      await Promise.all(
+      const fTargets = await Promise.all(
         targets.map(async (target) => {
-          const targetImgRef = ref(storage, target.imgUrl);
+          const targetImgRef = ref(storage, target.imgPath);
 
-          return uploadBytes(targetImgRef, target.imgFile);
+          await uploadBytes(targetImgRef, target.imgFile);
+          const targetImgUrl = await getDownloadURL(targetImgRef);
+
+          return {
+            id: target.id,
+            name: target.name,
+            imgUrl: targetImgUrl,
+            xRange: target.xRange,
+            yRange: target.yRange,
+          };
         }),
       );
-
-      const fTargets = targets.map((target) => ({
-        id: target.id,
-        name: target.name,
-        imgUrl: target.imgUrl,
-        xRange: target.xRange,
-        yRange: target.yRange,
-      }));
 
       await setDoc(doc(db, 'levels', id.current), {
         title,
         difficulty,
         imgUrl,
         targets: fTargets,
+        createdAt: Timestamp.now(),
       });
 
       navigate('/');
