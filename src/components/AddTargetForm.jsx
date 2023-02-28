@@ -9,11 +9,9 @@ function AddTargetForm({
   setStartPos, setEndPos,
   setTargets,
   levelId,
-  setColor,
 }) {
   const targetNameRef = useRef();
   const targetImgFileRef = useRef();
-  const targetColorRef = useRef();
 
   const [targetImgFile, setTargetImgFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -43,7 +41,6 @@ function AddTargetForm({
           preview,
           xRange,
           yRange,
-          color: targetColorRef.current.value,
         }];
       });
 
@@ -77,16 +74,6 @@ function AddTargetForm({
         <p>{`x(${xRange.join(', ')})`}</p>
         <p>{`y(${yRange.join(', ')})`}</p>
       </div>
-      <label htmlFor="target-color">
-        Color
-        <input
-          ref={targetColorRef}
-          type="color"
-          name="target-color"
-          id="target-color"
-          onChange={(e) => setColor(e.target.value)}
-        />
-      </label>
       <button type="submit" onClick={handleSubmit}>Add</button>
     </form>
   );

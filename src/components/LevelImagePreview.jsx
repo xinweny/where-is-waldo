@@ -43,15 +43,26 @@ function LevelImagePreview({
 
   return (
     <div>
-      <AddTargetForm
-        xRange={[startPosRef.current[0], endPosRef.current[0]].sort((a, b) => a - b)}
-        yRange={[startPosRef.current[1], endPosRef.current[1]].sort((a, b) => a - b)}
-        setTargets={setTargets}
-        levelId={levelId}
-        setStartPos={setStartPos}
-        setEndPos={setEndPos}
-        setColor={setSelectColor}
-      />
+      <div>
+        <AddTargetForm
+          xRange={[startPosRef.current[0], endPosRef.current[0]].sort((a, b) => a - b)}
+          yRange={[startPosRef.current[1], endPosRef.current[1]].sort((a, b) => a - b)}
+          setTargets={setTargets}
+          levelId={levelId}
+          setStartPos={setStartPos}
+          setEndPos={setEndPos}
+        />
+        <label htmlFor="select-color">
+          Color
+          <input
+            type="color"
+            name="select-color"
+            id="select-color"
+            value={selectColor}
+            onChange={(e) => setSelectColor(e.target.value)}
+          />
+        </label>
+      </div>
       <div className="level-img-preview">
         <img
           className="level-img"
@@ -89,7 +100,7 @@ function LevelImagePreview({
             scale={scale}
             size={sizeRef.current}
             name={target.name}
-            color={target.color}
+            color={selectColor}
           />
         ))}
         <TargetSelectBox
