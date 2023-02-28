@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-function Timer() {
-  const [time, setTime] = useState();
+import { formatMs } from '../utils/helpers';
 
-  useEffect(() => {
-    const timerFunc = setInterval(() => setTime(new Date()), 1000);
-
-    return () => clearInterval(timerFunc);
-  }, []);
-
+function Timer({ duration }) {
   return (
     <div className="timer">
-      {time}
+      {formatMs(duration)}
     </div>
   );
 }

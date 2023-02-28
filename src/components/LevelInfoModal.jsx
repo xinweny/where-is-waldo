@@ -1,10 +1,10 @@
 import React from 'react';
 
-function LevelInfoModal({ info, setStartTime }) {
+function LevelInfoModal({ info, handleStart }) {
   return (
     <div className="level-info-modal">
       <p>{info}</p>
-      <button type="button" onClick={() => setStartTime(new Date())}>Start</button>
+      <button type="button" onClick={handleStart}>Start</button>
     </div>
   );
 }

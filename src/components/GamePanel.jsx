@@ -3,7 +3,7 @@ import React from 'react';
 import TargetStatus from './TargetStatus';
 import Timer from './Timer';
 
-function GamePanel({ targets, foundTargets }) {
+function GamePanel({ targets, foundTargets, duration }) {
   return (
     <div className="game-panel">
       <div>
@@ -14,7 +14,7 @@ function GamePanel({ targets, foundTargets }) {
           </TargetStatus>
         ))}
       </div>
-      <Timer />
+      <Timer duration={duration} />
     </div>
   );
 }

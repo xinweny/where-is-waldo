@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function SelectTargetButton({
   id,
@@ -7,9 +7,16 @@ function SelectTargetButton({
   yRange,
   name,
   setFoundTargets,
+  foundTargets,
   setTargetWindowStyle,
 }) {
   const [style, setStyle] = useState({});
+
+  useEffect(() => {
+    const display = (foundTargets.includes(id) ? 'none' : 'block');
+
+    setStyle((prev) => ({ ...prev, display }));
+  }, [foundTargets]);
 
   const checkSelection = (e) => {
     e.stopPropagation();
@@ -19,7 +26,6 @@ function SelectTargetButton({
       && coords[1] <= yRange[1]
     ) {
       setFoundTargets((prev) => [...prev, id]);
-      setStyle((prev) => ({ ...prev, display: 'none' }));
     }
 
     setTargetWindowStyle((prev) => ({ ...prev, display: 'none' }));

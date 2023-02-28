@@ -7,7 +7,12 @@ import SelectTargetButton from './SelectTargetButton';
 
 import '../styles/GameWindow.css';
 
-function GameWindow({ level, setFoundTargets }) {
+function GameWindow({
+  level,
+  setFoundTargets,
+  foundTargets,
+  isGameInProgress,
+}) {
   const imgRef = useRef();
   const sizeRef = useRef(null);
 
@@ -55,7 +60,11 @@ function GameWindow({ level, setFoundTargets }) {
             imgRef.current.offsetHeight / sizeRef.current[1],
           ]);
         }}
-        onClick={(e) => setCoords(convertRelativePos(e).map((coord, i) => coord / scale[i]))}
+        onClick={(e) => {
+          if (isGameInProgress) {
+            setCoords(convertRelativePos(e).map((coord, i) => coord / scale[i]));
+          }
+        }}
       />
       <div
         className="target-window"
@@ -69,6 +78,7 @@ function GameWindow({ level, setFoundTargets }) {
             xRange={target.xRange}
             yRange={target.yRange}
             coords={coords}
+            foundTargets={foundTargets}
             setFoundTargets={setFoundTargets}
             setTargetWindowStyle={setTargetWindowStyle}
           />

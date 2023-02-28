@@ -39,3 +39,13 @@ export const styleSelectBox = (start, end, scale, originalSize) => {
 
   return style;
 };
+
+export const formatMs = (ms) => {
+  if (!ms) return '00:00:0';
+
+  const min = Math.floor(ms / 60000);
+  const sec = Math.floor((ms / 1000) % 60);
+  const millisec = Math.floor(ms % 1000).toString(10)[0];
+
+  return `${(min < 10) ? '0' : ''}${min}:${(sec < 10) ? '0' : ''}${sec}:${millisec}`;
+};
