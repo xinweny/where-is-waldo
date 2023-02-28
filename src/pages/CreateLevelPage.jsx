@@ -8,7 +8,6 @@ import { useImagePreview } from '../utils/hooks';
 import { db, storage } from '../utils/firebase-config';
 
 import LevelPreCreateForm from '../components/LevelPreCreateForm';
-import AddTargetForm from '../components/AddTargetForm';
 import LevelImagePreview from '../components/LevelImagePreview';
 import TargetPreviewCard from '../components/TargetPreviewCard';
 
@@ -18,8 +17,6 @@ function CreateLevelPage() {
   const [imgFile, setImgFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [targets, setTargets] = useState([]);
-  const [xRange, setXRange] = useState([0, 0]);
-  const [yRange, setYRange] = useState([0, 0]);
 
   const id = useRef(uniqid());
 
@@ -64,6 +61,7 @@ function CreateLevelPage() {
         imgUrl,
         targets: fTargets,
         createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
       });
 
       navigate('/');
@@ -92,26 +90,17 @@ function CreateLevelPage() {
       </div>
       {preview ? (
         <div>
-          <AddTargetForm
-            xRange={xRange}
-            yRange={yRange}
-            setXRange={setXRange}
-            setYRange={setYRange}
-            setTargets={setTargets}
-            levelId={id.current}
-          />
           <LevelImagePreview
             imgUrl={preview}
-            xRange={xRange}
-            yRange={yRange}
-            setXRange={setXRange}
-            setYRange={setYRange}
+            targets={targets}
+            setTargets={setTargets}
+            levelId={id.current}
           />
           <button
             type="submit"
             onClick={handleSubmit}
           >
-            Create Level
+            Create
           </button>
         </div>
       )

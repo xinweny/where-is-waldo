@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function LevelCard({ level }) {
+function LevelCard({ level, isAdmin }) {
   return (
     <div className="level-card">
       <img src={level.imgUrl} alt={level.title} />
@@ -20,6 +20,11 @@ function LevelCard({ level }) {
           />
         ))}
       </div>
+      {(isAdmin) ? (
+        <Link to={`levels/${level.id}/edit`} state={{ level }}>
+          <img src="#" alt="Edit level" />
+        </Link>
+      ) : null}
     </div>
   );
 }

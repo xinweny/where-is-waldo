@@ -6,13 +6,14 @@ import { useImagePreview } from '../utils/hooks';
 function AddTargetForm({
   xRange,
   yRange,
-  setXRange,
-  setYRange,
+  setStartPos, setEndPos,
   setTargets,
   levelId,
+  setColor,
 }) {
   const targetNameRef = useRef();
   const targetImgFileRef = useRef();
+  const targetColorRef = useRef();
 
   const [targetImgFile, setTargetImgFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -42,13 +43,15 @@ function AddTargetForm({
           preview,
           xRange,
           yRange,
+          color: targetColorRef.current.value,
         }];
       });
 
       targetNameRef.current.value = '';
       targetImgFileRef.current.value = '';
-      setXRange([0, 0]);
-      setYRange([0, 0]);
+
+      setStartPos([0, 0]);
+      setEndPos([0, 0]);
     }
   };
 
@@ -70,8 +73,20 @@ function AddTargetForm({
           onChange={(e) => setTargetImgFile(e.target.files[0])}
         />
       </label>
-      <p>{`x(${xRange.join(', ')})`}</p>
-      <p>{`y(${yRange.join(', ')})`}</p>
+      <div>
+        <p>{`x(${xRange.join(', ')})`}</p>
+        <p>{`y(${yRange.join(', ')})`}</p>
+      </div>
+      <label htmlFor="target-color">
+        Color
+        <input
+          ref={targetColorRef}
+          type="color"
+          name="target-color"
+          id="target-color"
+          onChange={(e) => setColor(e.target.value)}
+        />
+      </label>
       <button type="submit" onClick={handleSubmit}>Add</button>
     </form>
   );

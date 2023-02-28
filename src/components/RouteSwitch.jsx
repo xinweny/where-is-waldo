@@ -23,7 +23,7 @@ function RouteSwitch({ isAdmin, handleSignIn, handleSignOut }) {
             <AdminLoginPage handleSignIn={handleSignIn} />
           }
         />
-        <Route path="/" element={<LevelSelectPage />} />
+        <Route path="/" element={<LevelSelectPage isAdmin={isAdmin} />} />
         <Route
           path="/level/create"
           element={(

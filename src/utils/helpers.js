@@ -1,6 +1,6 @@
 export const unscalePos = (pos, scale) => pos.map((p, i) => p / scale[i]);
 
-export const scalePos = (ref, scale) => ref.current.map((p, i) => p * scale[i]);
+export const scalePos = (pos, scale) => pos.map((p, i) => p * scale[i]);
 
 export const convertRelativePos = (e) => {
   const offset = e.target.getBoundingClientRect();
@@ -13,7 +13,7 @@ export const convertRelativePos = (e) => {
   return newPos;
 };
 
-export const styleSelectBox = (start, end, scale, originalSize) => {
+export const styleSelectBox = (start, end, scale, originalSize, color) => {
   const size = [
     (Math.abs(end[0] - start[0])) * scale[0],
     (Math.abs(end[1] - start[1])) * scale[1],
@@ -22,7 +22,8 @@ export const styleSelectBox = (start, end, scale, originalSize) => {
   const style = {
     width: `${size[0]}px`,
     height: `${size[1]}px`,
-    border: size.every((dim) => dim !== 0) ? '1px solid black' : 'none',
+    border: size.every((dim) => dim !== 0) ? `1px solid ${color}` : 'none',
+    color,
   };
 
   if (end[0] > start[0]) {

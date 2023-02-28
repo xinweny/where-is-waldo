@@ -5,7 +5,7 @@ import { db } from '../utils/firebase-config';
 
 import LevelCard from '../components/LevelCard';
 
-function LevelSelectPage() {
+function LevelSelectPage({ isAdmin }) {
   const [levels, setLevels] = useState([]);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function LevelSelectPage() {
     <main className="level-select-page">
       <h2>Level Select</h2>
       <div className="level-cards">
-        {levels.map((level) => <LevelCard key={level.id} level={level} />)}
+        {levels.map((level) => <LevelCard key={level.id} level={level} isAdmin={isAdmin} />)}
       </div>
     </main>
   );
