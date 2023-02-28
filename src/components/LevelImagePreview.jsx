@@ -7,7 +7,8 @@ import {
 } from '../utils/helpers';
 import { useWindowResize } from '../utils/hooks';
 
-import AddTargetForm from './AddTargetForm';
+import TargetForm from './TargetForm';
+import TargetPreviewCard from './TargetPreviewCard';
 import TargetSelectBox from './TargetSelectBox';
 
 import '../styles/LevelImagePreview.css';
@@ -44,7 +45,7 @@ function LevelImagePreview({
   return (
     <div>
       <div>
-        <AddTargetForm
+        <TargetForm
           xRange={[startPosRef.current[0], endPosRef.current[0]].sort((a, b) => a - b)}
           yRange={[startPosRef.current[1], endPosRef.current[1]].sort((a, b) => a - b)}
           setTargets={setTargets}
@@ -62,6 +63,17 @@ function LevelImagePreview({
             onChange={(e) => setSelectColor(e.target.value)}
           />
         </label>
+      </div>
+      <div>
+        <h3>Targets</h3>
+        {(targets.length > 0) ? targets.map((target) => (
+          <TargetPreviewCard
+            key={target.id}
+            target={target}
+            setTargets={setTargets}
+            levelId={levelId}
+          />
+        )) : <p>No targets to show.</p>}
       </div>
       <div className="level-img-preview">
         <img

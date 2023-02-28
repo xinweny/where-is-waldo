@@ -2,10 +2,7 @@ import { useEffect } from 'react';
 
 const useImagePreview = (imgFile, setPreview) => {
   useEffect(() => {
-    if (!imgFile) {
-      setPreview(null);
-      return () => {};
-    }
+    if (!imgFile) return () => {};
 
     const imgUrl = URL.createObjectURL(imgFile);
     setPreview(imgUrl);

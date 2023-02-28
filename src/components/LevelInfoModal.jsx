@@ -1,9 +1,9 @@
 import React from 'react';
 
-function LevelInfoModal({ info, handleStart }) {
+function LevelInfoModal({ description, handleStart }) {
   return (
     <div className="level-info-modal">
-      <p>{info}</p>
+      <p>{description}</p>
       <button type="button" onClick={handleStart}>Start</button>
     </div>
   );

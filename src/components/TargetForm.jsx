@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import uniqid from 'uniqid';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-import { useImagePreview } from '../utils/hooks';
+import { storage } from '../utils/firebase-config';
 
-function AddTargetForm({
+function TargetForm({
   xRange,
   yRange,
   setStartPos, setEndPos,
@@ -14,9 +15,6 @@ function AddTargetForm({
   const targetImgFileRef = useRef();
 
   const [targetImgFile, setTargetImgFile] = useState(null);
-  const [preview, setPreview] = useState(null);
-
-  useImagePreview(targetImgFile, setPreview);
 
   const isSubmissionValid = () => (
     targetNameRef.current.value !== ''
@@ -25,24 +23,25 @@ function AddTargetForm({
       && yRange.some((y) => y !== 0)
   );
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isSubmissionValid()) {
-      setTargets((prevTarget) => {
-        const id = uniqid();
-        const imgPath = `levels/${levelId}/targets/${id}.${targetImgFile.name.split('.').pop()}`;
+      const id = uniqid();
+      const imgPath = `levels/${levelId}/targets/${id}.${targetImgFile.name.split('.').pop()}`;
 
-        return [...prevTarget, {
-          id,
-          name: targetNameRef.current.value,
-          imgFile: targetImgFile,
-          imgPath,
-          preview,
-          xRange,
-          yRange,
-        }];
-      });
+      const targetImgRef = ref(storage, imgPath);
+
+      await uploadBytes(targetImgRef, targetImgFile);
+      const targetImgUrl = await getDownloadURL(targetImgRef);
+
+      setTargets((prevTarget) => [...prevTarget, {
+        id,
+        name: targetNameRef.current.value,
+        imgUrl: targetImgUrl,
+        xRange,
+        yRange,
+      }]);
 
       targetNameRef.current.value = '';
       targetImgFileRef.current.value = '';
@@ -79,4 +78,4 @@ function AddTargetForm({
   );
 }
 
-export default AddTargetForm;
+export default TargetForm;

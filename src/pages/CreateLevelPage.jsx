@@ -7,14 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { useImagePreview } from '../utils/hooks';
 import { db, storage } from '../utils/firebase-config';
 
-import LevelPreCreateForm from '../components/LevelPreCreateForm';
+import LevelForm from '../components/LevelForm';
 import LevelImagePreview from '../components/LevelImagePreview';
-import TargetPreviewCard from '../components/TargetPreviewCard';
 
 function CreateLevelPage() {
   const [title, setTitle] = useState('');
   const [difficulty, setDifficulty] = useState(1);
   const [imgFile, setImgFile] = useState(null);
+  const [description, setDescription] = useState('');
   const [preview, setPreview] = useState(null);
   const [targets, setTargets] = useState([]);
 
@@ -22,10 +22,6 @@ function CreateLevelPage() {
 
   useImagePreview(imgFile, setPreview);
   const navigate = useNavigate();
-
-  const deleteTarget = (targetId) => {
-    setTargets((prevTargets) => prevTargets.filter((target) => target.id !== targetId));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,28 +34,12 @@ function CreateLevelPage() {
       await uploadBytes(levelImgRef, imgFile);
       const imgUrl = await getDownloadURL(levelImgRef);
 
-      const fTargets = await Promise.all(
-        targets.map(async (target) => {
-          const targetImgRef = ref(storage, target.imgPath);
-
-          await uploadBytes(targetImgRef, target.imgFile);
-          const targetImgUrl = await getDownloadURL(targetImgRef);
-
-          return {
-            id: target.id,
-            name: target.name,
-            imgUrl: targetImgUrl,
-            xRange: target.xRange,
-            yRange: target.yRange,
-          };
-        }),
-      );
-
       await setDoc(doc(db, 'levels', id.current), {
         title,
         difficulty,
         imgUrl,
-        targets: fTargets,
+        description,
+        targets,
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
       });
@@ -70,24 +50,15 @@ function CreateLevelPage() {
 
   return (
     <main className="create-level-page">
-      <div>
-        <LevelPreCreateForm
-          setTitle={setTitle}
-          difficulty={difficulty}
-          setDifficulty={setDifficulty}
-          setImgFile={setImgFile}
-        />
-        <div>
-          <h3>Targets</h3>
-          {targets.map((target) => (
-            <TargetPreviewCard
-              key={target.id}
-              target={target}
-              handleDelete={deleteTarget}
-            />
-          ))}
-        </div>
-      </div>
+      <LevelForm
+        title={title}
+        setTitle={setTitle}
+        difficulty={difficulty}
+        setDifficulty={setDifficulty}
+        description={description}
+        setDescription={setDescription}
+        setImgFile={setImgFile}
+      />
       {preview ? (
         <div>
           <LevelImagePreview

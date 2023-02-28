@@ -21,7 +21,7 @@ function LevelCard({ level, isAdmin }) {
         ))}
       </div>
       {(isAdmin) ? (
-        <Link to={`levels/${level.id}/edit`} state={{ level }}>
+        <Link to={`levels/${level.id}/edit`} state={{ level, mode: 'edit' }}>
           <img src="#" alt="Edit level" />
         </Link>
       ) : null}

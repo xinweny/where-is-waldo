@@ -49,7 +49,7 @@ function LevelPage() {
         />
         {(startTime) ? null : (
           <LevelInfoModal
-            info={level.info}
+            info={level.description}
             handleStart={() => setStartTime((new Date()).valueOf())}
           />
         )}

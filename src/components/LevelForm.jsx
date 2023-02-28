@@ -1,9 +1,9 @@
 import React from 'react';
 
 function LevelPreCreateForm({
-  setTitle,
-  difficulty,
-  setDifficulty,
+  title, setTitle,
+  difficulty, setDifficulty,
+  description, setDescription,
   setImgFile,
 }) {
   return (
@@ -13,6 +13,7 @@ function LevelPreCreateForm({
         <input
           type="text"
           id="level-title"
+          value={title}
           required
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -30,6 +31,15 @@ function LevelPreCreateForm({
           onChange={(e) => {
             setDifficulty(Number(e.target.value));
           }}
+        />
+      </label>
+      <label htmlFor="level-description">
+        Description
+        <textarea
+          name="level-description"
+          id="level-description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </label>
       <label htmlFor="level-image">

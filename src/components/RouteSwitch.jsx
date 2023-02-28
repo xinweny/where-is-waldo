@@ -30,18 +30,17 @@ function RouteSwitch({ isAdmin, handleSignIn, handleSignOut }) {
             <AdminRoute isAdmin={isAdmin}>
               <CreateLevelPage />
             </AdminRoute>
-    )}
+          )}
         />
-        <Route path="/levels/:id" element={<LevelPage />}>
-          <Route
-            path="edit"
-            element={(
-              <AdminRoute isAdmin={isAdmin}>
-                <EditLevelPage />
-              </AdminRoute>
-     )}
-          />
-        </Route>
+        <Route
+          path="/levels/:id/edit"
+          element={(
+            <AdminRoute isAdmin={isAdmin}>
+              <EditLevelPage />
+            </AdminRoute>
+          )}
+        />
+        <Route path="/levels/:id" element={<LevelPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
       </Routes>
       <Footer />
