@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 import { db } from '../utils/firebase-config';
@@ -40,6 +40,7 @@ function GameEndModal({
           levelId,
           name: fName,
           ms: duration,
+          createdAt: Timestamp.now(),
         });
 
         navigate(`/leaderboard/${levelId}`);
