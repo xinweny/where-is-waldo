@@ -45,6 +45,7 @@ function LevelImagePreview({
   return (
     <div>
       <div>
+        <h3>Targets</h3>
         <TargetForm
           xRange={[startPosRef.current[0], endPosRef.current[0]].sort((a, b) => a - b)}
           yRange={[startPosRef.current[1], endPosRef.current[1]].sort((a, b) => a - b)}
@@ -65,13 +66,11 @@ function LevelImagePreview({
         </label>
       </div>
       <div>
-        <h3>Targets</h3>
         {(targets.length > 0) ? targets.map((target) => (
           <TargetPreviewCard
             key={target.id}
             target={target}
             setTargets={setTargets}
-            levelId={levelId}
           />
         )) : <p>No targets to show.</p>}
       </div>

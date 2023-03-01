@@ -6,7 +6,6 @@ import { storage } from '../utils/firebase-config';
 function TargetPreviewCard({
   target,
   setTargets,
-  levelId,
 }) {
   return (
     <div>
@@ -21,7 +20,7 @@ function TargetPreviewCard({
         onClick={async () => {
           setTargets((prevTargets) => prevTargets.filter((t) => t.id !== target.id));
 
-          const imgUrl = `levels/${levelId}/targets/${target.id}.${target.imgUrl.split('.').pop().split('?')[0]}`;
+          const imgUrl = target.imgUrl.split('?')[0];
           const imgRef = ref(storage, imgUrl);
 
           await deleteObject(imgRef);
