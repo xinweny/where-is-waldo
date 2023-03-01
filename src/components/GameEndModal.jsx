@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 import { db } from '../utils/firebase-config';
-import { formatMs } from '../utils/helpers';
+import { formatMs, filter } from '../utils/helpers';
 
 function GameEndModal({
   title,
@@ -12,20 +12,40 @@ function GameEndModal({
   levelId,
 }) {
   const [name, setName] = useState('');
+  const [validationMsg, setValidationMsg] = useState('');
 
+  const inputNameRef = useRef();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (name !== '') {
+      if (!(/[A-Za-z0-9]+/.test(name))) setValidationMsg('Name must contain only alphanumerical characters.');
+    } else {
+      setValidationMsg('');
+    }
+  }, [name]);
 
   const submitScore = async (e) => {
     e.preventDefault();
 
-    if (name !== '') {
-      await addDoc(collection(db, 'scores'), {
-        levelId,
-        name,
-        ms: duration,
-      });
+    const inputEl = inputNameRef.current;
 
-      navigate(`/leaderboard/${levelId}`);
+    if (inputEl.checkValidity()) {
+      const fName = filter.clean(name);
+
+      if (fName.includes('*')) {
+        setValidationMsg('No profanity allowed.');
+      } else {
+        await addDoc(collection(db, 'scores'), {
+          levelId,
+          name: fName,
+          ms: duration,
+        });
+
+        navigate(`/leaderboard/${levelId}`);
+      }
+    } else {
+      setValidationMsg('Name is required.');
     }
   };
 
@@ -36,7 +56,17 @@ function GameEndModal({
       <div>
         <label htmlFor="player-name">
           <p>Name</p>
-          <input type="text" htmlFor="player-name" onChange={(e) => setName(e.target.value)} />
+          <p className="validation-msg">{validationMsg}</p>
+          <input
+            ref={inputNameRef}
+            type="text"
+            htmlFor="player-name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            pattern="[A-Za-z0-9]+"
+            maxLength="36"
+            required
+          />
         </label>
         <button type="submit" onClick={submitScore}>Add to Leaderboard</button>
       </div>

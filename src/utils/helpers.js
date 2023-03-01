@@ -1,3 +1,5 @@
+import Filter from 'bad-words';
+
 export const unscalePos = (pos, scale) => pos.map((p, i) => p / scale[i]);
 
 export const scalePos = (pos, scale) => pos.map((p, i) => p * scale[i]);
@@ -50,3 +52,5 @@ export const formatMs = (ms) => {
 
   return `${(min < 10) ? '0' : ''}${min}:${(sec < 10) ? '0' : ''}${sec}:${millisec}`;
 };
+
+export const filter = new Filter({ placeHolder: '*' });
