@@ -1,32 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 
 import { db } from '../utils/firebase-config';
+import { useFetchDocs } from '../utils/hooks';
 
 import LevelCard from '../components/LevelCard';
 
 function LevelSelectPage({ isAdmin }) {
   const [levels, setLevels] = useState([]);
 
-  useEffect(() => {
-    const fetchLevels = async () => {
-      if (levels.length === 0) {
-        getDocs(collection(db, 'levels')).then((snapshot) => {
-          const fLevels = [];
-
-          snapshot.forEach((doc) => {
-            fLevels.push({ id: doc.id, ...doc.data() });
-          });
-
-          setLevels(fLevels);
-        });
-      }
-    };
-
-    fetchLevels();
-
-    return () => new AbortController().abort();
-  }, []);
+  useFetchDocs(
+    () => getDocs(collection(db, 'levels')),
+    setLevels,
+    [],
+  );
 
   return (
     <main className="level-select-page">

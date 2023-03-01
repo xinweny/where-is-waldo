@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import Filter from 'bad-words';
 
 import { db } from '../utils/firebase-config';
-import { formatMs, filter } from '../utils/helpers';
+import { formatMs } from '../utils/helpers';
 
 function GameEndModal({
   title,
@@ -16,6 +17,7 @@ function GameEndModal({
 
   const inputNameRef = useRef();
   const navigate = useNavigate();
+  const filter = new Filter({ placeHolder: '*' });
 
   useEffect(() => {
     if (name !== '') {
@@ -43,7 +45,7 @@ function GameEndModal({
           createdAt: Timestamp.now(),
         });
 
-        navigate(`/leaderboard/${levelId}`);
+        navigate(`/leaderboard?id=${levelId}`);
       }
     } else {
       setValidationMsg('Name is required.');

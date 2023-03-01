@@ -28,7 +28,28 @@ const useWindowResize = (imgRef, sizeRef, setScale) => {
   }, []);
 };
 
+const useFetchDocs = (getter, setter, deps = null) => {
+  useEffect(() => {
+    const fetchDocs = async () => {
+      const snapshot = await getter();
+
+      const data = [];
+
+      snapshot.forEach((doc) => {
+        data.push({ id: doc.id, ...doc.data() });
+      });
+
+      setter(data);
+    };
+
+    fetchDocs();
+
+    return () => new AbortController().abort();
+  }, deps);
+};
+
 export {
   useImagePreview,
   useWindowResize,
+  useFetchDocs,
 };
