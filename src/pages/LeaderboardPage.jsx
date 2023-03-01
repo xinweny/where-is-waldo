@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 
 import { db } from '../utils/firebase-config';
 import { useFetchDocs } from '../utils/hooks';
 
 import ScoresTable from '../components/ScoresTable';
 
-function LeaderboardPage() {
+function LeaderboardPage({ isAdmin }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [levels, setLevels] = useState([]);
   const [scores, setScores] = useState([]);
@@ -20,16 +25,20 @@ function LeaderboardPage() {
   );
 
   useEffect(() => {
-    const id = searchParams.get('id');
-    if (id) {
-      setLevel(levels.find((lvl) => lvl.id === id));
-    } else {
-      setLevel(levels[0]);
+    if (levels.length > 0) {
+      const id = searchParams.get('id');
+
+      if (id) {
+        setLevel(levels.find((lvl) => lvl.id === id));
+      } else {
+        setLevel(levels[0]);
+        setSearchParams({ id: levels[0].id });
+      }
     }
-  }, []);
+  }, [levels]);
 
   useFetchDocs(
-    () => getDocs(collection(db, 'scores')),
+    () => getDocs(query(collection(db, 'scores'), where('levelId', '==', level ? level.id : ''))),
     setScores,
     [level],
   );
@@ -37,8 +46,9 @@ function LeaderboardPage() {
   return (
     <main className="leaderboard-page">
       <nav>
-        {levels.map((lvl) => (
+        {(level) ? levels.map((lvl) => (
           <button
+            className={`level-nav-btn ${(lvl.id === level.id) ? 'active' : ''}`}
             type="button"
             key={lvl.id}
             onClick={() => {
@@ -48,14 +58,19 @@ function LeaderboardPage() {
           >
             {lvl.title}
           </button>
-        ))}
+        )) : null}
       </nav>
       {(level) ? (
         <div>
           <Link to={`/levels/${level.id}`} state={{ level }}>
             <h2>{level.title}</h2>
           </Link>
-          <ScoresTable scores={scores} level={level} />
+          <ScoresTable
+            scores={scores.sort((a, b) => a.ms - b.ms)}
+            setScores={setScores}
+            level={level}
+            isAdmin={isAdmin}
+          />
         </div>
       ) : null}
     </main>

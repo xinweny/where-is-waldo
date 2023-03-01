@@ -41,7 +41,7 @@ function RouteSwitch({ isAdmin, handleSignIn, handleSignOut }) {
           )}
         />
         <Route path="/levels/:id" element={<LevelPage />} />
-        <Route path="/leaderboard" element={<LeaderboardPage />} />
+        <Route path="/leaderboard" element={<LeaderboardPage isAdmin={isAdmin} />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -28,7 +28,7 @@ const useWindowResize = (imgRef, sizeRef, setScale) => {
   }, []);
 };
 
-const useFetchDocs = (getter, setter, deps = null) => {
+const useFetchDocs = (getter, setter, deps) => {
   useEffect(() => {
     const fetchDocs = async () => {
       const snapshot = await getter();
