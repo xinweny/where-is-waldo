@@ -49,12 +49,14 @@ function LevelPage() {
         />
         {(startTime) ? null : (
           <LevelInfoModal
-            info={level.description}
+            title={level.title}
+            description={level.description}
             handleStart={() => setStartTime((new Date()).valueOf())}
           />
         )}
         {(isGameEnd) ? (
           <GameEndModal
+            levelId={level.id}
             title={level.title}
             duration={duration}
             handleRestart={() => {
