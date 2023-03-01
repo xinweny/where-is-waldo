@@ -9,7 +9,7 @@ function LevelPreCreateForm({
   return (
     <form>
       <label htmlFor="level-title">
-        Title
+        <p>Title</p>
         <input
           type="text"
           id="level-title"
@@ -19,7 +19,7 @@ function LevelPreCreateForm({
         />
       </label>
       <label htmlFor="level-difficulty">
-        Difficulty
+        <p>{`Difficulty (${difficulty})`}</p>
         <input
           type="range"
           id="level-difficulty"
@@ -34,7 +34,7 @@ function LevelPreCreateForm({
         />
       </label>
       <label htmlFor="level-description">
-        Description
+        <p>Description</p>
         <textarea
           name="level-description"
           id="level-description"
@@ -43,7 +43,7 @@ function LevelPreCreateForm({
         />
       </label>
       <label htmlFor="level-image">
-        Image
+        <p>Image</p>
         <input
           type="file"
           id="level-image"

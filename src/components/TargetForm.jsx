@@ -54,11 +54,11 @@ function TargetForm({
   return (
     <form>
       <label htmlFor="target-name">
-        Target name
+        <p>Name</p>
         <input type="text" id="target-name" ref={targetNameRef} />
       </label>
       <label htmlFor="target-image">
-        Target Image
+        <p>Image</p>
         <input
           type="file"
           id="target-image"

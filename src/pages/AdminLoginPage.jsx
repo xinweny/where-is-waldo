@@ -12,12 +12,12 @@ function AdminLoginPage({ handleSignIn }) {
       <h2>Admin Login</h2>
       <form>
         <label htmlFor="email">
-          Email
+          <p>Email</p>
           <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} />
         </label>
 
         <label htmlFor="password">
-          Password
+          <p>Password</p>
           <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} />
         </label>
 

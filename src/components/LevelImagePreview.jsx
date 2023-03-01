@@ -54,7 +54,7 @@ function LevelImagePreview({
           setEndPos={setEndPos}
         />
         <label htmlFor="select-color">
-          Color
+          <p>Color</p>
           <input
             type="color"
             name="select-color"
