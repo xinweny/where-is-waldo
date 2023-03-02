@@ -13,7 +13,7 @@ import {
 } from 'firebase/firestore';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { useImagePreview } from '../utils/hooks';
+import { useImagePreview, useCleanupTargetImgs } from '../utils/hooks';
 import { db, storage } from '../utils/firebase-config';
 
 import LevelForm from '../components/LevelForm';
@@ -33,6 +33,7 @@ function EditLevelPage() {
 
   useImagePreview(imgFile, setPreview);
   const navigate = useNavigate();
+  useCleanupTargetImgs(level.id);
 
   const editLevel = async (e) => {
     e.preventDefault();

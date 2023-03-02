@@ -1,4 +1,8 @@
 import { useEffect } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { ref, listAll, deleteObject } from 'firebase/storage';
+
+import { db, storage } from './firebase-config';
 
 const useImagePreview = (imgFile, setPreview) => {
   useEffect(() => {
@@ -35,8 +39,8 @@ const useFetchDocs = (getter, setter, deps) => {
 
       const data = [];
 
-      snapshot.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data() });
+      snapshot.forEach((d) => {
+        data.push({ id: d.id, ...d.data() });
       });
 
       setter(data);
@@ -48,8 +52,25 @@ const useFetchDocs = (getter, setter, deps) => {
   }, deps);
 };
 
+const useCleanupTargetImgs = (levelId) => {
+  useEffect(() => async () => {
+    const levelSnap = await getDoc(doc(db, 'levels', levelId));
+    const targetImgRefs = (await listAll(ref(storage, `/levels/${levelId}/targets`))).items;
+
+    if (levelSnap.exists()) {
+      const targetIds = levelSnap.data().targets.map((t) => t.id);
+
+      const refsToDelete = targetImgRefs.filter((r) => !targetIds.includes(r.name.split('.')[0]));
+      if (refsToDelete.length > 0) refsToDelete.forEach(async (r) => deleteObject(r));
+    } else if (targetImgRefs.length > 0) {
+      targetImgRefs.forEach(async (r) => deleteObject(r));
+    }
+  }, []);
+};
+
 export {
   useImagePreview,
   useWindowResize,
   useFetchDocs,
+  useCleanupTargetImgs,
 };

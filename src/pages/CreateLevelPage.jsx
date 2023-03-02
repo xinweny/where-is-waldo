@@ -4,7 +4,7 @@ import { setDoc, doc, Timestamp } from 'firebase/firestore';
 import uniqid from 'uniqid';
 import { useNavigate } from 'react-router-dom';
 
-import { useImagePreview } from '../utils/hooks';
+import { useImagePreview, useCleanupTargetImgs } from '../utils/hooks';
 import { db, storage } from '../utils/firebase-config';
 
 import LevelForm from '../components/LevelForm';
@@ -21,7 +21,10 @@ function CreateLevelPage() {
   const id = useRef(uniqid());
 
   useImagePreview(imgFile, setPreview);
+
   const navigate = useNavigate();
+
+  useCleanupTargetImgs(id.current);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
