@@ -17,7 +17,7 @@ import { useImagePreview, useCleanupTargetImgs } from '../utils/hooks';
 import { db, storage } from '../utils/firebase-config';
 
 import LevelForm from '../components/LevelForm';
-import LevelImagePreview from '../components/LevelImagePreview';
+import LevelEditor from '../components/LevelEditor';
 import WarningModal from '../components/WarningModal';
 
 function EditLevelPage() {
@@ -99,7 +99,7 @@ function EditLevelPage() {
           setImgFile={setImgFile}
         />
         <div>
-          <LevelImagePreview
+          <LevelEditor
             imgUrl={preview}
             targets={targets}
             setTargets={setTargets}

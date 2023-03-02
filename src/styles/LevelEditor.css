@@ -1,12 +1,14 @@
 .level-img-preview {
 	width: 100vw;
+	height: auto;
 	overflow-x: scroll;
 }
 
 .img-preview-container {
 	position: relative;
 	display: block;
-	width: 100%;
+	width: max-content;
+	height: max-content;
 }
 
 .level-img {

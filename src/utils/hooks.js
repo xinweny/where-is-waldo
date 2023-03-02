@@ -15,12 +15,12 @@ const useImagePreview = (imgFile, setPreview) => {
   }, [imgFile]);
 };
 
-const useWindowResize = (sizeRef, setScale) => {
+const useWindowResize = (imgRef, setScale) => {
   useEffect(() => {
     const handleResize = () => {
       const vw = window.innerWidth;
 
-      setScale(vw / sizeRef.current[0]);
+      if (imgRef.current) setScale(vw / imgRef.current.naturalWidth);
     };
 
     window.addEventListener('resize', handleResize);

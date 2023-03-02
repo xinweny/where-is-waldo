@@ -8,7 +8,7 @@ import { useImagePreview, useCleanupTargetImgs } from '../utils/hooks';
 import { db, storage } from '../utils/firebase-config';
 
 import LevelForm from '../components/LevelForm';
-import LevelImagePreview from '../components/LevelImagePreview';
+import LevelEditor from '../components/LevelEditor';
 
 function CreateLevelPage() {
   const [title, setTitle] = useState('');
@@ -64,16 +64,13 @@ function CreateLevelPage() {
       />
       {preview ? (
         <div>
-          <LevelImagePreview
+          <LevelEditor
             imgUrl={preview}
             targets={targets}
             setTargets={setTargets}
             levelId={id.current}
           />
-          <button
-            type="submit"
-            onClick={handleSubmit}
-          >
+          <button type="submit" onClick={handleSubmit}>
             Create
           </button>
         </div>
