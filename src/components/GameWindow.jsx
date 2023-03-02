@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import { useWindowResize } from '../utils/hooks';
-import { convertRelativePos } from '../utils/helpers';
+import { convertRelativePos, unscalePos } from '../utils/helpers';
 
 import SelectTargetButton from './SelectTargetButton';
 
@@ -17,18 +17,18 @@ function GameWindow({
   const sizeRef = useRef(null);
 
   const [coords, setCoords] = useState([0, 0]);
-  const [scale, setScale] = useState([1, 1]);
+  const [scale, setScale] = useState(1);
   const [targetWindowStyle, setTargetWindowStyle] = useState({});
 
-  useWindowResize(imgRef, sizeRef, setScale);
+  useWindowResize(sizeRef, setScale);
 
   useEffect(() => {
     if (coords.every((coord) => coord !== 0)) {
       setTargetWindowStyle((prev) => ({
         ...prev,
         display: 'block',
-        left: `${coords[0] * scale[0]}px`,
-        top: `${coords[1] * scale[1]}px`,
+        left: `${coords[0] * scale}px`,
+        top: `${coords[1] * scale}px`,
       }));
     }
   }, [coords]);
@@ -36,8 +36,8 @@ function GameWindow({
   useEffect(() => {
     setTargetWindowStyle((prev) => ({
       ...prev,
-      left: `${coords[0] * scale[0]}px`,
-      top: `${coords[1] * scale[1]}px`,
+      left: `${coords[0] * scale}px`,
+      top: `${coords[1] * scale}px`,
     }));
   }, [scale]);
 
@@ -55,14 +55,11 @@ function GameWindow({
             imgRef.current.naturalHeight,
           ];
 
-          setScale([
-            imgRef.current.offsetWidth / sizeRef.current[0],
-            imgRef.current.offsetHeight / sizeRef.current[1],
-          ]);
+          setScale(imgRef.current.offsetWidth / sizeRef.current[0]);
         }}
         onClick={(e) => {
           if (isGameInProgress) {
-            setCoords(convertRelativePos(e).map((coord, i) => coord / scale[i]));
+            setCoords(unscalePos(convertRelativePos(e), scale));
           }
         }}
       />

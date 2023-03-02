@@ -9,6 +9,7 @@ import { useWindowResize } from '../utils/hooks';
 
 import TargetForm from './TargetForm';
 import TargetPreviewCard from './TargetPreviewCard';
+import ZoomInput from './ZoomInput';
 import TargetSelectBox from './TargetSelectBox';
 
 import '../styles/LevelImagePreview.css';
@@ -27,10 +28,10 @@ function LevelImagePreview({
   const [startPos, setStartPos] = useState([0, 0]);
   const [endPos, setEndPos] = useState([0, 0]);
   const [isDragging, setIsDragging] = useState(false);
-  const [scale, setScale] = useState([1, 1]);
+  const [scale, setScale] = useState(1);
   const [selectColor, setSelectColor] = useState('#000000');
 
-  useWindowResize(imgRef, sizeRef, setScale);
+  useWindowResize(sizeRef, setScale);
 
   useEffect(() => {
     startPosRef.current = unscalePos(startPos, scale).map((pos) => Math.round(pos));
@@ -38,6 +39,13 @@ function LevelImagePreview({
   }, [startPos, endPos]);
 
   useEffect(() => {
+    if (sizeRef.current.every((size) => size > 0)) {
+      const { style } = imgRef.current;
+
+      style.width = `${sizeRef.current[0] * scale}px`;
+      style.height = `${sizeRef.current[1] * scale}px`;
+    }
+
     setStartPos(scalePos(startPosRef.current, scale));
     setEndPos(scalePos(endPosRef.current, scale));
   }, [scale]);
@@ -74,53 +82,62 @@ function LevelImagePreview({
           />
         )) : <p>No targets to show.</p>}
       </div>
+      <ZoomInput
+        zoom={scale}
+        setZoom={setScale}
+      />
       <div className="level-img-preview">
-        <img
-          className="level-img"
-          ref={imgRef}
-          src={imgUrl}
-          draggable={false}
-          alt="Preview"
-          onLoad={() => {
-            setStartPos([0, 0]);
-            setEndPos([0, 0]);
+        <div
+          className="img-preview-container"
+          style={(imgRef.current) ? {
+            width: imgRef.current.style.width,
+            height: imgRef.current.style.height,
+          } : {}}
+        >
+          <img
+            className="level-img"
+            ref={imgRef}
+            src={imgUrl}
+            draggable={false}
+            alt="Preview"
+            onLoad={() => {
+              setStartPos([0, 0]);
+              setEndPos([0, 0]);
 
-            sizeRef.current = [
-              imgRef.current.naturalWidth,
-              imgRef.current.naturalHeight,
-            ];
+              sizeRef.current = [
+                imgRef.current.naturalWidth,
+                imgRef.current.naturalHeight,
+              ];
 
-            setScale([
-              imgRef.current.offsetWidth / sizeRef.current[0],
-              imgRef.current.offsetHeight / sizeRef.current[1],
-            ]);
-          }}
-          onMouseDown={(e) => {
-            setIsDragging(true);
-            setStartPos(convertRelativePos(e));
-            setEndPos(convertRelativePos(e));
-          }}
-          onMouseMove={(e) => { if (isDragging) setEndPos(convertRelativePos(e)); }}
-          onMouseUp={() => setIsDragging(false)}
-        />
-        {targets.map((target) => (
-          <TargetSelectBox
-            key={target.id}
-            start={[target.xRange[0], target.yRange[0]]}
-            end={[target.xRange[1], target.yRange[1]]}
-            scale={scale}
-            size={sizeRef.current}
-            name={target.name}
-            color={selectColor}
+              setScale(imgRef.current.offsetWidth / sizeRef.current[0]);
+            }}
+            onMouseDown={(e) => {
+              setIsDragging(true);
+              setStartPos(convertRelativePos(e));
+              setEndPos(convertRelativePos(e));
+            }}
+            onMouseMove={(e) => { if (isDragging) setEndPos(convertRelativePos(e)); }}
+            onMouseUp={() => setIsDragging(false)}
           />
-        ))}
-        <TargetSelectBox
-          start={startPosRef.current}
-          end={endPosRef.current}
-          scale={scale}
-          size={sizeRef.current}
-          color={selectColor}
-        />
+          {targets.map((target) => (
+            <TargetSelectBox
+              key={target.id}
+              start={[target.xRange[0], target.yRange[0]]}
+              end={[target.xRange[1], target.yRange[1]]}
+              scale={scale}
+              size={sizeRef.current}
+              name={target.name}
+              color={selectColor}
+            />
+          ))}
+          <TargetSelectBox
+            start={startPosRef.current}
+            end={endPosRef.current}
+            scale={scale}
+            color={selectColor}
+            imgSize={sizeRef.current}
+          />
+        </div>
       </div>
     </div>
   );

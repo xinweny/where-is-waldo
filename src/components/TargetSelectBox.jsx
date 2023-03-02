@@ -6,14 +6,14 @@ function TargetSelectBox({
   start,
   end,
   scale,
-  size,
+  imgSize,
   name,
   color,
 }) {
   return (
     <div
       className="target-select"
-      style={styleSelectBox(start, end, scale, size, color)}
+      style={styleSelectBox(start, end, scale, imgSize, color)}
     >
       <p>{name}</p>
     </div>

@@ -1,6 +1,6 @@
-export const unscalePos = (pos, scale) => pos.map((p, i) => p / scale[i]);
+export const unscalePos = (pos, scale) => pos.map((p) => p / scale);
 
-export const scalePos = (pos, scale) => pos.map((p, i) => p * scale[i]);
+export const scalePos = (pos, scale) => pos.map((p) => p * scale);
 
 export const convertRelativePos = (e) => {
   const offset = e.target.getBoundingClientRect();
@@ -13,10 +13,10 @@ export const convertRelativePos = (e) => {
   return newPos;
 };
 
-export const styleSelectBox = (start, end, scale, originalSize, color) => {
+export const styleSelectBox = (start, end, scale, imgSize, color) => {
   const size = [
-    (Math.abs(end[0] - start[0])) * scale[0],
-    (Math.abs(end[1] - start[1])) * scale[1],
+    (Math.abs(end[0] - start[0])) * scale,
+    (Math.abs(end[1] - start[1])) * scale,
   ];
 
   const style = {
@@ -27,15 +27,15 @@ export const styleSelectBox = (start, end, scale, originalSize, color) => {
   };
 
   if (end[0] > start[0]) {
-    style.left = `${start[0] * scale[0]}px`;
+    style.left = `${start[0] * scale}px`;
   } else {
-    style.right = `${(originalSize[0] - start[0]) * scale[0]}px`;
+    style.right = `${(imgSize[0] - start[0]) * scale}px`;
   }
 
   if (end[1] > start[1]) {
-    style.top = `${start[1] * scale[1]}px`;
+    style.top = `${start[1] * scale}px`;
   } else {
-    style.bottom = `${(originalSize[1] - start[1]) * scale[1]}px`;
+    style.bottom = `${(imgSize[1] - start[1]) * scale}px`;
   }
 
   return style;
