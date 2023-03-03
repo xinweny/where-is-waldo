@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import TargetForm from './TargetForm';
 import TargetPreviewCard from './TargetPreviewCard';
-import ZoomInput from './ZoomInput';
 import LevelImagePreview from './LevelImagePreview';
 import TargetSelectBox from './TargetSelectBox';
 
@@ -50,7 +49,6 @@ function LevelEditor({
           />
         )) : <p>No targets to show.</p>}
       </div>
-      <ZoomInput zoom={scale} setZoom={setScale} />
       <LevelImagePreview
         imgUrl={imgUrl}
         size={size}
