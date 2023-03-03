@@ -2,6 +2,8 @@ import React from 'react';
 
 import { styleSelectBox } from '../utils/helpers';
 
+import '../styles/TargetSelectBox.css';
+
 function TargetSelectBox({
   start,
   end,

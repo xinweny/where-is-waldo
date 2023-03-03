@@ -6,8 +6,6 @@ import ZoomInput from './ZoomInput';
 import LevelImagePreview from './LevelImagePreview';
 import TargetSelectBox from './TargetSelectBox';
 
-import '../styles/LevelEditor.css';
-
 function LevelEditor({
   imgUrl,
   targets,

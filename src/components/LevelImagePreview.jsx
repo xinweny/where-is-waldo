@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { scalePos, unscalePos, convertRelativePos } from '../utils/helpers';
-
 import { useWindowResize } from '../utils/hooks';
+
+import LevelImageContainer from './LevelImageContainer';
 
 function LevelImagePreview({
   imgUrl,
@@ -13,7 +14,6 @@ function LevelImagePreview({
   children,
 }) {
   const imgRef = useRef();
-  const containerRef = useRef();
 
   const [startPos, setStartPos] = useState([0, 0]);
   const [endPos, setEndPos] = useState([0, 0]);
@@ -42,36 +42,34 @@ function LevelImagePreview({
   }, [scale]);
 
   return (
-    <div className="level-img-preview">
-      <div className="img-preview-container" ref={containerRef}>
-        <img
-          className="level-img"
-          ref={imgRef}
-          src={imgUrl}
-          draggable={false}
-          alt="Level"
-          onLoad={() => {
-            setStartPos([0, 0]);
-            setEndPos([0, 0]);
+    <LevelImageContainer>
+      <img
+        className="level-img"
+        ref={imgRef}
+        src={imgUrl}
+        draggable={false}
+        alt="Level"
+        onLoad={() => {
+          setStartPos([0, 0]);
+          setEndPos([0, 0]);
 
-            set.size([
-              imgRef.current.naturalWidth,
-              imgRef.current.naturalHeight,
-            ]);
+          set.size([
+            imgRef.current.naturalWidth,
+            imgRef.current.naturalHeight,
+          ]);
 
-            set.scale(window.innerWidth / imgRef.current.naturalWidth);
-          }}
-          onMouseDown={(e) => {
-            setIsDragging(true);
-            setStartPos(convertRelativePos(e));
-            setEndPos(convertRelativePos(e));
-          }}
-          onMouseMove={(e) => { if (isDragging) setEndPos(convertRelativePos(e)); }}
-          onMouseUp={() => setIsDragging(false)}
-        />
-        {children}
-      </div>
-    </div>
+          set.scale(window.innerWidth / imgRef.current.naturalWidth);
+        }}
+        onMouseDown={(e) => {
+          setIsDragging(true);
+          setStartPos(convertRelativePos(e));
+          setEndPos(convertRelativePos(e));
+        }}
+        onMouseMove={(e) => { if (isDragging) setEndPos(convertRelativePos(e)); }}
+        onMouseUp={() => setIsDragging(false)}
+      />
+      {children}
+    </LevelImageContainer>
   );
 }
 
