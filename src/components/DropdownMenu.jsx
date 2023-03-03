@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import uniqid from 'uniqid';
+
+import gearIcon from '../assets/gear.svg';
+
+import '../styles/DropdownMenu.css';
 
 function DropdownMenu({ children }) {
   const [showMenu, setShowMenu] = useState(false);
   const dropdownRef = useRef(null);
+  console.log(children);
 
   useEffect(() => {
     const pageClickEvent = (e) => {
@@ -18,18 +22,18 @@ function DropdownMenu({ children }) {
   }, [showMenu]);
 
   return (
-    <div className="dropdown">
+    <div className="dropdown-menu">
       <button
         type="button"
         ref={dropdownRef}
         onClick={() => setShowMenu(!showMenu)}
       >
-        <img src="#" alt="Admin dropdown" />
+        <img className="icon-small" src={gearIcon} alt="Admin dropdown" />
       </button>
       {showMenu ? (
-        <ul className="dropdown-content">
-          {children.map((child) => <li key={uniqid()}>{child}</li>)}
-        </ul>
+        <div className="dropdown-content">
+          {children}
+        </div>
       ) : null}
     </div>
   );

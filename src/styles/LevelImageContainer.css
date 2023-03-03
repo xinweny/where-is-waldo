@@ -14,3 +14,7 @@
 .level-img {
 	height: auto;
 }
+
+.level-img:hover {
+	cursor: crosshair;
+}

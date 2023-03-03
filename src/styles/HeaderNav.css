@@ -1,0 +1,15 @@
+header nav {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	justify-content: center;
+}
+
+header img.icon {
+	width: 32px;
+	height: auto;
+}
+
+header img.icon-small {
+	width: 20px;
+}

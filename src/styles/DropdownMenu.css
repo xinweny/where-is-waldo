@@ -1,0 +1,16 @@
+.dropdown-content {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+}
+
+.dropdown-content button {
+	padding: 4px 8px;
+}
+
+.dropdown-content button:not(:last-child) {
+	border-bottom: 1px solid black;
+}

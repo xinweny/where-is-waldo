@@ -1,0 +1,12 @@
+header {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 16px;
+}
+
+header button {
+	border: none;
+	background-color: transparent;
+}
