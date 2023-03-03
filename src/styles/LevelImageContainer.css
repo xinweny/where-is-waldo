@@ -14,17 +14,3 @@
 .level-img {
 	height: auto;
 }
-
-.target-select {
-	position: absolute;
-	pointer-events: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.target-select p {
-	font-size: 10px;
-	text-transform: uppercase;
-	color: inherit;
-}

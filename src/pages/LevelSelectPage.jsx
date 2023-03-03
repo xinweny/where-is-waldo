@@ -17,7 +17,6 @@ function LevelSelectPage({ isAdmin }) {
 
   return (
     <main className="level-select-page">
-      <h2>Level Select</h2>
       <div className="level-cards">
         {levels.map((level) => <LevelCard key={level.id} level={level} isAdmin={isAdmin} />)}
       </div>
