@@ -23,7 +23,3 @@ label {
 ::-webkit-scrollbar {
 	display: none;
 }
-
-.pos-relative {
-  position: relative;
-}

@@ -53,7 +53,7 @@ function GameEndModal({
   };
 
   return (
-    <div className="game-modal game-end-modal">
+    <div className="modal game-end-modal">
       <h3>{title}</h3>
       <p>{`Congratulations! You found all targets in ${formatMs(duration)}.`}</p>
       <div>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../styles/WarningModal.css';
+
 function WarningModal({
   message,
   header,
@@ -7,10 +9,10 @@ function WarningModal({
   setShow,
 }) {
   return (
-    <div className="warning-modal">
+    <div className="modal warning-modal">
       <h3>{header}</h3>
       <p>{message}</p>
-      <div>
+      <div className="confirmation-btns">
         <button type="button" className="yes-btn" onClick={action}>Yes</button>
         <button type="button" className="no-btn" onClick={() => setShow(false)}>No</button>
       </div>
