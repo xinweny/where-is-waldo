@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
+import ImageInput from './ImageInput';
 import { ReactComponent as ImgUploadSVG } from '../assets/image-upload.svg';
 
 import '../styles/LevelForm.css';
@@ -10,8 +11,6 @@ function LevelForm({
   description, setDescription,
   setImgFile,
 }) {
-  const imgInputRef = useRef();
-
   return (
     <form className="level-form">
       <section>
@@ -40,23 +39,7 @@ function LevelForm({
             }}
           />
         </label>
-        <label htmlFor="level-image">
-          <ImgUploadSVG
-            alt="Upload button"
-            title="Upload level image"
-            fill={imgInputRef.current && imgInputRef.current.value ? '#00f2cd' : '#cfcfcf'}
-          />
-          <p>{imgInputRef.current && imgInputRef.current.value ? imgInputRef.current.files[0].name : 'No image uploaded.'}</p>
-          <input
-            ref={imgInputRef}
-            type="file"
-            id="level-image"
-            accept="image/*"
-            multiple={false}
-            required
-            onChange={(e) => setImgFile(e.target.files[0])}
-          />
-        </label>
+        <ImageInput id="level-image" setImgFile={setImgFile} SVGComponent={ImgUploadSVG} />
       </section>
       <label htmlFor="level-description">
         <p>Description</p>

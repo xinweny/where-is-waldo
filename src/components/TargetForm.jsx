@@ -4,6 +4,10 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 import { storage } from '../utils/firebase-config';
 
+import ImageInput from './ImageInput';
+
+import { ReactComponent as TargetImgUploadSVG } from '../assets/avatar-upload.svg';
+
 import '../styles/TargetForm.css';
 
 function TargetForm({
@@ -60,23 +64,9 @@ function TargetForm({
           <p>Name</p>
           <input type="text" id="target-name" ref={targetNameRef} />
         </label>
-        <label htmlFor="target-image">
-          <p>Image</p>
-          <input
-            type="file"
-            id="target-image"
-            ref={targetImgFileRef}
-            accept="image/*"
-            multiple={false}
-            required
-            onChange={(e) => setTargetImgFile(e.target.files[0])}
-          />
-        </label>
+        <p className="coords-preview">{`x(${xRange.join(', ')}) y(${yRange.join(', ')})`}</p>
+        <ImageInput id="target-image" setImgFile={setTargetImgFile} SVGComponent={TargetImgUploadSVG} />
       </section>
-      <div>
-        <p>{`x(${xRange.join(', ')})`}</p>
-        <p>{`y(${yRange.join(', ')})`}</p>
-      </div>
       <button type="submit" onClick={handleSubmit}>Add</button>
     </form>
   );

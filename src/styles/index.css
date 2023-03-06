@@ -3,10 +3,6 @@
   margin: 0;
 }
 
-html {
-  overflow-x: hidden;
-}
-
 a, a:visited {
   text-decoration: none;
   color: inherit;
@@ -22,6 +18,10 @@ button:hover {
 
 label {
   display: block;
+}
+
+::-webkit-scrollbar {
+	display: none;
 }
 
 .pos-relative {

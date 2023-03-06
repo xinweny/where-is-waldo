@@ -19,20 +19,3 @@ textarea#level-description {
 	width: 100%;
 	white-space: pre-wrap;
 }
-
-label[for="level-image"] {
-	align-self: flex-end;
-}
-
-label[for="level-image"] svg {
-	width: 36px;
-	height: auto;
-}
-
-label[for="level-image"] svg:hover {
-	cursor: pointer;
-}
-
-#level-image {
-	display: none;
-}

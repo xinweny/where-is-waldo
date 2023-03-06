@@ -1,0 +1,22 @@
+#image-input {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+#image-input svg {
+	width: 36px;
+	height: auto;
+}
+
+#image-input svg:hover {
+	cursor: pointer;
+}
+
+#image-input input {
+	display: none;
+}
+
+#image-input p {
+	font-size: 12px;
+}

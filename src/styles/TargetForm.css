@@ -1,0 +1,13 @@
+.target-form {
+	padding: 16px;
+}
+
+.target-form section {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.coords-preview {
+	align-self: flex-end;
+}
