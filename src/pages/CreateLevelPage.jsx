@@ -60,6 +60,7 @@ function CreateLevelPage() {
         setDifficulty={setDifficulty}
         description={description}
         setDescription={setDescription}
+        imgFile={imgFile}
         setImgFile={setImgFile}
       />
       {preview ? (

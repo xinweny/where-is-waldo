@@ -1,3 +1,38 @@
+.level-form {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	gap: 16px;
+}
+
+.level-form section {
+	display: flex;
+	gap: 16px;
+}
+
+#level-title {
+	font-size: 24px;
+	font-weight: bold;
+}
+
 textarea#level-description {
+	width: 100%;
 	white-space: pre-wrap;
+}
+
+label[for="level-image"] {
+	align-self: flex-end;
+}
+
+label[for="level-image"] svg {
+	width: 36px;
+	height: auto;
+}
+
+label[for="level-image"] svg:hover {
+	cursor: pointer;
+}
+
+#level-image {
+	display: none;
 }

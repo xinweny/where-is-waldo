@@ -35,7 +35,7 @@ function LevelCard({ level, isAdmin }) {
         <div className="target-cards">
           {level.targets.map((target) => (
             <div className="target-img-container" key={target.id}>
-              <img src={target.imgUrl} alt={target.name} />
+              <img src={target.imgUrl} alt={target.name} title={target.name} />
             </div>
           ))}
         </div>

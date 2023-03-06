@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 a, a:visited {
   text-decoration: none;
   color: inherit;
@@ -14,6 +18,10 @@ button {
 
 button:hover {
   cursor: pointer;
+}
+
+label {
+  display: block;
 }
 
 .pos-relative {

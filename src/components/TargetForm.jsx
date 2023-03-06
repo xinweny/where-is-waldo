@@ -4,6 +4,8 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 import { storage } from '../utils/firebase-config';
 
+import '../styles/TargetForm.css';
+
 function TargetForm({
   xRange,
   yRange,
@@ -52,23 +54,25 @@ function TargetForm({
   };
 
   return (
-    <form>
-      <label htmlFor="target-name">
-        <p>Name</p>
-        <input type="text" id="target-name" ref={targetNameRef} />
-      </label>
-      <label htmlFor="target-image">
-        <p>Image</p>
-        <input
-          type="file"
-          id="target-image"
-          ref={targetImgFileRef}
-          accept="image/*"
-          multiple={false}
-          required
-          onChange={(e) => setTargetImgFile(e.target.files[0])}
-        />
-      </label>
+    <form className="target-form">
+      <section>
+        <label htmlFor="target-name">
+          <p>Name</p>
+          <input type="text" id="target-name" ref={targetNameRef} />
+        </label>
+        <label htmlFor="target-image">
+          <p>Image</p>
+          <input
+            type="file"
+            id="target-image"
+            ref={targetImgFileRef}
+            accept="image/*"
+            multiple={false}
+            required
+            onChange={(e) => setTargetImgFile(e.target.files[0])}
+          />
+        </label>
+      </section>
       <div>
         <p>{`x(${xRange.join(', ')})`}</p>
         <p>{`y(${yRange.join(', ')})`}</p>
