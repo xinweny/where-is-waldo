@@ -6,6 +6,8 @@ import { useFetchDocs } from '../utils/hooks';
 
 import LevelCard from '../components/LevelCard';
 
+import '../styles/LevelSelectPage.css';
+
 function LevelSelectPage({ isAdmin }) {
   const [levels, setLevels] = useState([]);
 
