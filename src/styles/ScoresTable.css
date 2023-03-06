@@ -1,0 +1,36 @@
+.scores-table {
+	align-self: flex-start;
+}
+
+.scores-table td, .scores-table th {
+	text-align: center;
+	padding: 4px;
+}
+
+.scores-table tbody, .scores-table thead {
+	background-color: white;
+}
+
+.scores-table tbody tr:nth-child(odd) {
+	background-color: #e5e5e5;
+}
+
+.score-cell {
+	position: relative;
+}
+
+.delete-score-btn {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 8px;
+	margin-top: auto;
+	margin-bottom: auto;
+	display: none;
+	background-color: transparent;
+	border: none;
+}
+
+tr:hover .delete-score-btn {
+	display: block;
+}

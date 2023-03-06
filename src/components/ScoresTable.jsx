@@ -6,6 +6,8 @@ import { db } from '../utils/firebase-config';
 
 import WarningModal from './WarningModal';
 
+import '../styles/ScoresTable.css';
+
 function ScoresTable({
   level,
   scores, setScores,
@@ -33,8 +35,8 @@ function ScoresTable({
   };
 
   return (
-    <div>
-      <table className="scores-table">
+    <>
+      <table className="scores-table" cellSpacing="0">
         <thead>
           <tr>
             <th>Rank</th>
@@ -47,18 +49,21 @@ function ScoresTable({
             <tr key={score.id}>
               <td>{i + 1}</td>
               <td>{score.name}</td>
-              <td>{score.ms / 1000}</td>
-              {(isAdmin) ? (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedScore(score);
-                    setShowWarningModal(true);
-                  }}
-                >
-                  x
-                </button>
-              ) : null}
+              <td className="score-cell">
+                <p>{score.ms / 1000}</p>
+                {(isAdmin) ? (
+                  <button
+                    type="button"
+                    className="delete-score-btn"
+                    onClick={() => {
+                      setSelectedScore(score);
+                      setShowWarningModal(true);
+                    }}
+                  >
+                    x
+                  </button>
+                ) : null}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -71,7 +76,7 @@ function ScoresTable({
           action={deleteScore}
         />
       ) : null}
-    </div>
+    </>
   );
 }
 

@@ -12,6 +12,8 @@ import { useFetchDocs } from '../utils/hooks';
 
 import ScoresTable from '../components/ScoresTable';
 
+import '../styles/LeaderboardPage.css';
+
 function LeaderboardPage({ isAdmin }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [levels, setLevels] = useState([]);
@@ -61,7 +63,8 @@ function LeaderboardPage({ isAdmin }) {
         )) : null}
       </nav>
       {(level) ? (
-        <div>
+        <div className="leaderboard-content">
+          <div className="background-img" style={{ backgroundImage: `url(${level.imgUrl})` }} />
           <Link to={`/levels/${level.id}`} state={{ level }}>
             <h2>{level.title}</h2>
           </Link>
