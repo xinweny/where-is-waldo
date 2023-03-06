@@ -13,8 +13,8 @@ function LevelCard({ level, isAdmin }) {
         <img src={level.imgUrl} alt={level.title} />
       </div>
       <div className="level-card-info">
-        <Link to={`levels/${level.id}`} state={{ level }}>
-          <div className="level-card-header">
+        <div className="level-card-header">
+          <Link to={`levels/${level.id}`} state={{ level }}>
             <h3>{level.title}</h3>
             <div className="stars">
               {[...Array(5).keys()].map((i) => (
@@ -25,21 +25,17 @@ function LevelCard({ level, isAdmin }) {
                 />
               ))}
             </div>
-            {(isAdmin) ? (
-              <Link className="edit-level-link" to={`levels/${level.id}/edit`} state={{ level, mode: 'edit' }}>
-                <img src={editIcon} alt="Edit level" />
-              </Link>
-            ) : null}
-          </div>
-        </Link>
+          </Link>
+          {(isAdmin) ? (
+            <Link className="edit-level-link" to={`levels/${level.id}/edit`} state={{ level, mode: 'edit' }}>
+              <img src={editIcon} alt="Edit level" />
+            </Link>
+          ) : null}
+        </div>
         <div className="target-cards">
           {level.targets.map((target) => (
-            <div className="target-card">
-              <img
-                key={target.id}
-                src={target.imgUrl}
-                alt={target.name}
-              />
+            <div className="target-img-container" key={target.id}>
+              <img src={target.imgUrl} alt={target.name} />
             </div>
           ))}
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../styles/LevelForm.css';
 
-function LevelPreCreateForm({
+function LevelForm({
   title, setTitle,
   difficulty, setDifficulty,
   description, setDescription,
@@ -41,7 +41,9 @@ function LevelPreCreateForm({
           name="level-description"
           id="level-description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
         />
       </label>
       <label htmlFor="level-image">
@@ -59,4 +61,4 @@ function LevelPreCreateForm({
   );
 }
 
-export default LevelPreCreateForm;
+export default LevelForm;

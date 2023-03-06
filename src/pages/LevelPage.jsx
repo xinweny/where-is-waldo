@@ -6,6 +6,8 @@ import GameWindow from '../components/GameWindow';
 import LevelInfoModal from '../components/LevelInfoModal';
 import GameEndModal from '../components/GameEndModal';
 
+import '../styles/LevelPage.css';
+
 function LevelPage() {
   const { level } = useLocation().state;
   const [foundTargets, setFoundTargets] = useState([]);
@@ -34,13 +36,13 @@ function LevelPage() {
   }, [isGameEnd]);
 
   return (
-    <div className="game-page">
+    <main className="level-page">
       <GamePanel
         targets={level.targets}
         foundTargets={foundTargets}
         duration={duration}
       />
-      <div>
+      <div className="pos-relative">
         <GameWindow
           level={level}
           setFoundTargets={setFoundTargets}
@@ -67,7 +69,7 @@ function LevelPage() {
           />
         ) : null}
       </div>
-    </div>
+    </main>
   );
 }
 

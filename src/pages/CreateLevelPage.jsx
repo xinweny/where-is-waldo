@@ -41,7 +41,7 @@ function CreateLevelPage() {
         title,
         difficulty,
         imgUrl,
-        description,
+        description: description.replace('/\n/g', '\\n'),
         targets,
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),

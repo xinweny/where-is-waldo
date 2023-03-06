@@ -49,7 +49,7 @@ function GameWindow({
   }, [scale]);
 
   return (
-    <div className="game-window">
+    <div className={`game-window ${isGameInProgress ? '' : 'disabled'}`}>
       <LevelImageContainer>
         <img
           className="level-img"
@@ -71,10 +71,7 @@ function GameWindow({
             }
           }}
         />
-        <div
-          className="target-window"
-          style={targetWindowStyle}
-        >
+        <div className="target-window" style={targetWindowStyle}>
           {level.targets.map((target) => (
             <SelectTargetButton
               key={target.id}

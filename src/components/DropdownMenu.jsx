@@ -7,7 +7,6 @@ import '../styles/DropdownMenu.css';
 function DropdownMenu({ children }) {
   const [showMenu, setShowMenu] = useState(false);
   const dropdownRef = useRef(null);
-  console.log(children);
 
   useEffect(() => {
     const pageClickEvent = (e) => {

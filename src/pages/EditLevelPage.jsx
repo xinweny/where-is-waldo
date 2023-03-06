@@ -26,7 +26,7 @@ function EditLevelPage() {
   const [title, setTitle] = useState(level.title);
   const [difficulty, setDifficulty] = useState(level.difficulty);
   const [imgFile, setImgFile] = useState(null);
-  const [description, setDescription] = useState(level.description);
+  const [description, setDescription] = useState(level.description.replace('\\n', '\n'));
   const [preview, setPreview] = useState(level.imgUrl);
   const [targets, setTargets] = useState(level.targets);
   const [showWarningModal, setShowWarningModal] = useState(false);
@@ -54,7 +54,7 @@ function EditLevelPage() {
         title,
         difficulty,
         imgUrl: imgUrl || preview,
-        description,
+        description: description.replace('/\n/g', '\\n'),
         targets,
         createdAt: level.createdAt,
         updatedAt: Timestamp.now(),
@@ -105,12 +105,7 @@ function EditLevelPage() {
             setTargets={setTargets}
             levelId={level.id}
           />
-          <button
-            type="submit"
-            onClick={editLevel}
-          >
-            Edit
-          </button>
+          <button type="submit" onClick={editLevel}>Save</button>
         </div>
         <button
           type="button"

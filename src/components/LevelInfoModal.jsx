@@ -2,9 +2,9 @@ import React from 'react';
 
 function LevelInfoModal({ title, description, handleStart }) {
   return (
-    <div className="level-info-modal">
+    <div className="game-modal level-info-modal">
       <h2>{title}</h2>
-      <p>{description}</p>
+      <p className="level-description">{description}</p>
       <button type="button" onClick={handleStart}>Start</button>
     </div>
   );
