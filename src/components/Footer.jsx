@@ -1,5 +1,9 @@
 import React from 'react';
 
+import ghIcon from '../assets/github.svg';
+
+import '../styles/Footer.css';
+
 function Footer() {
   return (
     <footer>
@@ -11,7 +15,7 @@ function Footer() {
         in 2023
       </p>
       <a href="https://github.com/xinweny/where-is-wally">
-        <img src="#" alt="Github" />
+        <img src={ghIcon} alt="Github" />
       </a>
     </footer>
   );

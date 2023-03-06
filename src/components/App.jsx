@@ -9,6 +9,8 @@ import { auth } from '../utils/firebase-config';
 
 import RouteSwitch from './RouteSwitch';
 
+import '../styles/App.css';
+
 function App() {
   const [admin, setAdmin] = useState(null);
 
