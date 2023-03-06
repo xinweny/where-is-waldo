@@ -1,0 +1,14 @@
+.zoom-input {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+}
+
+.zoom-input input {
+	width: 100px;
+}
+
+.zoom-input p {
+	font-size: 12px;
+}

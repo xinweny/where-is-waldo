@@ -98,24 +98,24 @@ function EditLevelPage() {
           setDescription={setDescription}
           setImgFile={setImgFile}
         />
-        <div>
-          <LevelEditor
-            imgUrl={preview}
-            targets={targets}
-            setTargets={setTargets}
-            levelId={level.id}
-          />
+        <LevelEditor
+          imgUrl={preview}
+          targets={targets}
+          setTargets={setTargets}
+          levelId={level.id}
+        />
+        <div className="level-edit-buttons">
           <button type="submit" onClick={editLevel}>Save</button>
+          <button
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowWarningModal(true);
+            }}
+          >
+            Delete
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            setShowWarningModal(true);
-          }}
-        >
-          Delete
-        </button>
       </div>
       {(showWarningModal) ? (
         <WarningModal

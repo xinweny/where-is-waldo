@@ -61,10 +61,13 @@ function TargetForm({
     <form className="target-form">
       <section>
         <label htmlFor="target-name">
-          <p>Name</p>
+          <p>Target Name</p>
           <input type="text" id="target-name" ref={targetNameRef} />
         </label>
-        <p className="coords-preview">{`x(${xRange.join(', ')}) y(${yRange.join(', ')})`}</p>
+        <div className="coords-preview">
+          <p>{`x(${xRange.join(', ')})`}</p>
+          <p>{`y(${yRange.join(', ')})`}</p>
+        </div>
         <ImageInput id="target-image" setImgFile={setTargetImgFile} SVGComponent={TargetImgUploadSVG} />
       </section>
       <button type="submit" onClick={handleSubmit}>Add</button>

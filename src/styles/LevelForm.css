@@ -19,3 +19,9 @@ textarea#level-description {
 	width: 100%;
 	white-space: pre-wrap;
 }
+
+.level-edit-buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}

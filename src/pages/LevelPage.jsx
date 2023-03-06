@@ -42,7 +42,7 @@ function LevelPage() {
         foundTargets={foundTargets}
         duration={duration}
       />
-      <div className="pos-relative">
+      <div>
         <GameWindow
           level={level}
           setFoundTargets={setFoundTargets}

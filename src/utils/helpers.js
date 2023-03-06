@@ -22,7 +22,7 @@ export const styleSelectBox = (start, end, scale, imgSize, color) => {
   const style = {
     width: `${size[0]}px`,
     height: `${size[1]}px`,
-    border: size.every((dim) => dim !== 0) ? `1px solid ${color}` : 'none',
+    border: size.every((dim) => dim !== 0) ? `2px solid ${color}` : 'none',
     color,
   };
 

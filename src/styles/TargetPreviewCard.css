@@ -1,0 +1,27 @@
+.target-preview-cards {
+	display: flex;
+	align-self: center;
+	justify-self: flex-end;
+}
+
+.target-preview-card {
+	position: relative;
+}
+
+.target-preview-card button {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	background-color: transparent;
+}
+
+.target-preview-card:hover button {
+	display: block;
+}
+
+.target-preview-card p {
+	font-size: 12px;
+	text-align: center;
+}

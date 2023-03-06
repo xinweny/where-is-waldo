@@ -1,0 +1,18 @@
+.level-editor-panel {
+	display: grid;
+	position: sticky;
+	top: 0;
+	grid-template-columns: auto 1fr auto;
+	gap: 4px;
+	padding: 8px 16px;
+	z-index: 1;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.img-preview-settings {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	gap: 4px;
+}

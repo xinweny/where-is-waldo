@@ -10,12 +10,16 @@ function TargetPreviewCard({
   setTargets,
 }) {
   return (
-    <div className="pos-relative">
+    <div className="target-preview-card">
       <div className="target-preview">
+        <div className="target-img-container">
+          <img
+            src={target.imgUrl}
+            alt={target.name}
+            title={`x(${target.xRange.join(', ')}) y(${target.yRange.join(', ')})`}
+          />
+        </div>
         <p>{target.name}</p>
-        <img src={target.imgUrl} alt={target.name} />
-        <p>{`x(${target.xRange.join(', ')})`}</p>
-        <p>{`y(${target.yRange.join(', ')})`}</p>
       </div>
       <button
         type="button"

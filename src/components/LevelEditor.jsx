@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 
 import TargetForm from './TargetForm';
 import TargetPreviewCard from './TargetPreviewCard';
+import ZoomInput from './ZoomInput';
 import LevelImagePreview from './LevelImagePreview';
 import TargetSelectBox from './TargetSelectBox';
+
+import '../styles/LevelEditor.css';
 
 function LevelEditor({
   imgUrl,
@@ -19,8 +22,7 @@ function LevelEditor({
 
   return (
     <div>
-      <div>
-        <h3>Targets</h3>
+      <div className="level-editor-panel">
         <TargetForm
           xRange={[start[0], end[0]].sort((a, b) => a - b)}
           yRange={[start[1], end[1]].sort((a, b) => a - b)}
@@ -29,8 +31,17 @@ function LevelEditor({
           setStartPos={setStart}
           setEndPos={setEnd}
         />
-        <label htmlFor="select-color">
-          <p>Color</p>
+        <div className="target-preview-cards">
+          {(targets.length > 0) ? targets.map((target) => (
+            <TargetPreviewCard
+              key={target.id}
+              target={target}
+              setTargets={setTargets}
+            />
+          )) : <p>No targets to show.</p>}
+        </div>
+        <div className="img-preview-settings">
+          <ZoomInput scale={scale} setScale={setScale} />
           <input
             type="color"
             name="select-color"
@@ -38,16 +49,7 @@ function LevelEditor({
             value={selectColor}
             onChange={(e) => setSelectColor(e.target.value)}
           />
-        </label>
-      </div>
-      <div>
-        {(targets.length > 0) ? targets.map((target) => (
-          <TargetPreviewCard
-            key={target.id}
-            target={target}
-            setTargets={setTargets}
-          />
-        )) : <p>No targets to show.</p>}
+        </div>
       </div>
       <LevelImagePreview
         imgUrl={imgUrl}
