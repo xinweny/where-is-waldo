@@ -1,29 +1,29 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import '../styles/ImageInput.css';
 
-function ImageInput({ id, setImgFile, SVGComponent }) {
-  const imgInputRef = useRef();
-
-  return (
-    <label htmlFor={id} id="image-input">
-      <SVGComponent
-        alt="Upload button"
-        title="Upload image button"
-        fill={imgInputRef.current && imgInputRef.current.value ? '#00f2cd' : '#cfcfcf'}
-      />
-      <p>{imgInputRef.current && imgInputRef.current.value ? imgInputRef.current.files[0].name : 'No image uploaded.'}</p>
-      <input
-        ref={imgInputRef}
-        type="file"
-        id={id}
-        accept="image/*"
-        multiple={false}
-        required
-        onChange={(e) => setImgFile(e.target.files[0])}
-      />
-    </label>
-  );
-}
+const ImageInput = React.forwardRef(({
+  id,
+  setImgFile,
+  SVGComponent,
+}, ref) => (
+  <label htmlFor={id} id="image-input">
+    <SVGComponent
+      alt="Upload button"
+      title="Upload image button"
+      fill={ref.current && ref.current.value ? '#00f2cd' : '#cfcfcf'}
+    />
+    <p>{ref.current && ref.current.value ? ref.current.files[0].name : 'Image required.'}</p>
+    <input
+      ref={ref}
+      type="file"
+      id={id}
+      accept="image/*"
+      multiple={false}
+      required
+      onChange={(e) => setImgFile(e.target.files[0])}
+    />
+  </label>
+));
 
 export default ImageInput;

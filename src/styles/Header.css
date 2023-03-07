@@ -10,3 +10,17 @@ header button {
 	border: none;
 	background-color: transparent;
 }
+
+.fade-in {
+	opacity: 0;
+	animation-name: fade-in;
+	animation-duration: 1.5s;
+	animation-timing-function: ease-in;
+	animation-delay: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}

@@ -8,7 +8,12 @@ import '../styles/Header.css';
 function Header({ isAdmin, handleSignOut }) {
   return (
     <header>
-      <h1><Link to="/">Hidden in Plain Sight</Link></h1>
+      <Link to="/">
+        <h1>
+          <span>Hidden</span>
+          <span className="fade-in"> in Plain Sight</span>
+        </h1>
+      </Link>
       <HeaderNav isAdmin={isAdmin} handleSignOut={handleSignOut} />
     </header>
   );

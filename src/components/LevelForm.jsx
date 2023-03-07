@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import ImageInput from './ImageInput';
 import { ReactComponent as ImgUploadSVG } from '../assets/image-upload.svg';
@@ -39,7 +39,7 @@ function LevelForm({
             }}
           />
         </label>
-        <ImageInput id="level-image" setImgFile={setImgFile} SVGComponent={ImgUploadSVG} />
+        <ImageInput id="level-image" ref={useRef()} setImgFile={setImgFile} SVGComponent={ImgUploadSVG} />
       </section>
       <label htmlFor="level-description">
         <p>Description</p>

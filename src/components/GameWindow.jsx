@@ -63,7 +63,7 @@ function GameWindow({
               imgRef.current.naturalHeight,
             ]);
 
-            setScale(imgRef.current.offsetWidth / imgRef.current.naturalWidth);
+            setScale(window.innerWidth / imgRef.current.naturalWidth);
           }}
           onClick={(e) => {
             if (isGameInProgress) {

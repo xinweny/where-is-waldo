@@ -20,11 +20,11 @@ function TargetForm({
   const targetNameRef = useRef();
   const targetImgFileRef = useRef();
 
-  const [targetImgFile, setTargetImgFile] = useState(null);
+  const [targetImgFile, setTargetImgFile] = useState('');
 
   const isSubmissionValid = () => (
     targetNameRef.current.value !== ''
-      && targetImgFileRef.current.files.length === 1
+      && targetImgFile
       && xRange.some((x) => x !== 0)
       && yRange.some((y) => y !== 0)
   );
@@ -68,7 +68,7 @@ function TargetForm({
           <p>{`x(${xRange.join(', ')})`}</p>
           <p>{`y(${yRange.join(', ')})`}</p>
         </div>
-        <ImageInput id="target-image" setImgFile={setTargetImgFile} SVGComponent={TargetImgUploadSVG} />
+        <ImageInput id="target-image" ref={targetImgFileRef} setImgFile={setTargetImgFile} SVGComponent={TargetImgUploadSVG} />
       </section>
       <button type="submit" onClick={handleSubmit}>Add</button>
     </form>
