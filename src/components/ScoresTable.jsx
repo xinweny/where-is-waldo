@@ -15,9 +15,11 @@ function ScoresTable({
 }) {
   if (scores.length === 0) {
     return (
-      <div>
-        <p>No high scores yet.</p>
-        <Link to={`/levels/${level.id}`} state={{ level }}>Be the first!</Link>
+      <div className="no-scores-display">
+        <p>
+          <span>No high scores yet.</span>
+          <Link to={`/levels/${level.id}`} state={{ level }}> Be the first!</Link>
+        </p>
       </div>
     );
   }

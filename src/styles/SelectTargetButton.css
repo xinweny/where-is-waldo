@@ -1,0 +1,13 @@
+.target-window {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+}
+
+.target-select-btn {
+	width: 100%;
+	display: block;
+	border: none;
+	background-color: transparent;
+	padding: 8px;
+}
