@@ -16,6 +16,7 @@ function GameWindow({
 }) {
   const imgRef = useRef();
 
+  const [fixedCoords, setFixedCoords] = useState([0, 0]);
   const [coords, setCoords] = useState([0, 0]);
   const [scale, setScale] = useState(1);
   const [size, setSize] = useState([0, 0]);
@@ -23,16 +24,7 @@ function GameWindow({
 
   useWindowResize(imgRef, setScale);
 
-  useEffect(() => {
-    if (coords.every((coord) => coord !== 0)) {
-      setTargetWindowStyle((prev) => ({
-        ...prev,
-        display: 'block',
-        left: `${coords[0] * scale}px`,
-        top: `${coords[1] * scale}px`,
-      }));
-    }
-  }, [coords]);
+  useEffect(() => { setCoords(scalePos(fixedCoords, scale)); }, [fixedCoords]);
 
   useEffect(() => {
     if (size.every((s) => s > 0)) {
@@ -45,8 +37,19 @@ function GameWindow({
       style.height = `${height}px`;
     }
 
-    setCoords(scalePos(coords, scale));
+    setCoords(scalePos(fixedCoords, scale));
   }, [scale]);
+
+  useEffect(() => {
+    if (fixedCoords.every((coord) => coord !== 0)) {
+      setTargetWindowStyle((prev) => ({
+        ...prev,
+        display: 'block',
+        left: `${fixedCoords[0] * scale}px`,
+        top: `${fixedCoords[1] * scale}px`,
+      }));
+    }
+  }, [coords]);
 
   return (
     <div className={`game-window ${isGameInProgress ? '' : 'disabled'}`}>
@@ -62,12 +65,12 @@ function GameWindow({
               imgRef.current.naturalWidth,
               imgRef.current.naturalHeight,
             ]);
-
             setScale(window.innerWidth / imgRef.current.naturalWidth);
           }}
           onClick={(e) => {
             if (isGameInProgress) {
-              setCoords(unscalePos(convertRelativePos(e), scale));
+              setCoords(convertRelativePos(e));
+              setFixedCoords(unscalePos(convertRelativePos(e), scale));
             }
           }}
         />
