@@ -44,7 +44,6 @@ function GameWindow({
     if (fixedCoords.every((coord) => coord !== 0)) {
       setTargetWindowStyle((prev) => ({
         ...prev,
-        display: 'block',
         left: `${fixedCoords[0] * scale}px`,
         top: `${fixedCoords[1] * scale}px`,
       }));
@@ -69,6 +68,7 @@ function GameWindow({
           }}
           onClick={(e) => {
             if (isGameInProgress) {
+              setTargetWindowStyle({ display: 'block' });
               setCoords(convertRelativePos(e));
               setFixedCoords(unscalePos(convertRelativePos(e), scale));
             }
@@ -82,7 +82,7 @@ function GameWindow({
               name={target.name}
               xRange={target.xRange}
               yRange={target.yRange}
-              coords={coords}
+              coords={fixedCoords}
               foundTargets={foundTargets}
               setFoundTargets={setFoundTargets}
               setTargetWindowStyle={setTargetWindowStyle}
