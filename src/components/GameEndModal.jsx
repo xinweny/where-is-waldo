@@ -6,6 +6,8 @@ import Filter from 'bad-words';
 import { db } from '../utils/firebase-config';
 import { formatMs } from '../utils/helpers';
 
+import '../styles/GameEndModal.css';
+
 function GameEndModal({
   title,
   duration,
@@ -56,7 +58,7 @@ function GameEndModal({
     <div className="modal game-end-modal">
       <h3>{title}</h3>
       <p>{`Congratulations! You found all targets in ${formatMs(duration)}.`}</p>
-      <div>
+      <form>
         <label htmlFor="player-name">
           <p>Name</p>
           <p className="validation-msg">{validationMsg}</p>
@@ -71,9 +73,9 @@ function GameEndModal({
             required
           />
         </label>
-        <button type="submit" onClick={submitScore}>Add to Leaderboard</button>
-      </div>
-      <button type="button" onClick={handleRestart}>Restart</button>
+        <button className="add-score-btn" type="submit" onClick={submitScore}>Add to Leaderboard</button>
+      </form>
+      <button className="restart-btn" type="button" onClick={handleRestart}>Restart</button>
     </div>
   );
 }

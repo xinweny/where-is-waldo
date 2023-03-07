@@ -7,6 +7,18 @@ header {
 	box-shadow: 0px 1px 4px 2px rgb(176, 176, 176);
 }
 
+.site-branding {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+}
+
+.site-branding img {
+	width: 48px;
+	height: auto;
+}
+
 header button {
 	border: none;
 	background-color: transparent;
