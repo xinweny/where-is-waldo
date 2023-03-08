@@ -1,7 +1,8 @@
 .target-preview-cards {
+	flex: 1;
 	display: flex;
-	align-self: center;
-	justify-self: flex-end;
+	justify-content: center;
+	gap: 16px;
 }
 
 .target-preview-card {

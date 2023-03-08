@@ -1,8 +1,9 @@
 .level-editor-panel {
-	display: grid;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 	position: sticky;
 	top: 0;
-	grid-template-columns: auto 1fr auto;
 	gap: 4px;
 	padding: 8px 16px;
 	z-index: 1;

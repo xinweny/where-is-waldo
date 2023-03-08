@@ -52,31 +52,33 @@ function CreateLevelPage() {
   };
 
   return (
-    <main className="create-level-page">
-      <LevelForm
-        title={title}
-        setTitle={setTitle}
-        difficulty={difficulty}
-        setDifficulty={setDifficulty}
-        description={description}
-        setDescription={setDescription}
-        imgFile={imgFile}
-        setImgFile={setImgFile}
-      />
-      {preview ? (
-        <div>
-          <LevelEditor
-            imgUrl={preview}
-            targets={targets}
-            setTargets={setTargets}
-            levelId={id.current}
-          />
-          <div className="level-edit-buttons">
-            <button type="submit" onClick={handleSubmit}>Create</button>
+    <main className="create-level-page form-page">
+      <div>
+        <LevelForm
+          title={title}
+          setTitle={setTitle}
+          difficulty={difficulty}
+          setDifficulty={setDifficulty}
+          description={description}
+          setDescription={setDescription}
+          imgFile={imgFile}
+          setImgFile={setImgFile}
+        />
+        {preview ? (
+          <div className="second-half-form">
+            <LevelEditor
+              imgUrl={preview}
+              targets={targets}
+              setTargets={setTargets}
+              levelId={id.current}
+            />
+            <div className="level-edit-buttons">
+              <button type="submit" onClick={handleSubmit}>Create</button>
+            </div>
           </div>
-        </div>
-      )
-        : null}
+        )
+          : null}
+      </div>
     </main>
   );
 }

@@ -1,3 +1,13 @@
+.create-level-page, .edit-level-page {
+	display: flex;
+	align-items: stretch;
+}
+
+.create-level-page > div, .edit-level-page > div {
+	display: flex;
+	flex-direction: column;
+}
+
 .level-form {
 	display: flex;
 	flex-wrap: wrap;
@@ -47,8 +57,30 @@ textarea#level-description {
 	white-space: pre-wrap;
 }
 
+.second-half-form {
+	flex: 1;
+	display: grid;
+	grid-template-rows: 1fr auto;
+	background-color: rgb(219, 219, 219);
+}
+
 .level-edit-buttons {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	padding: 16px;
+}
+
+.level-edit-buttons button {
+	background-color: rgb(0, 111, 0);
+	color: white;
+	padding: 8px 16px;
+	border-radius: 24px;
+	font-weight: bold;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+.level-edit-buttons .delete-level-btn {
+	background-color: rgb(165, 0, 0);
 }

@@ -21,7 +21,7 @@ function LevelEditor({
   const [selectColor, setSelectColor] = useState('#000000');
 
   return (
-    <div>
+    <div className="level-editor">
       <div className="level-editor-panel">
         <TargetForm
           xRange={[start[0], end[0]].sort((a, b) => a - b)}

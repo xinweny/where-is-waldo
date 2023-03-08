@@ -80,14 +80,15 @@ function EditLevelPage() {
   };
 
   return (
-    <main className="edit-level-page">
-      <div style={(showWarningModal) ? {
-        opacity: '50%',
-        pointerEvents: 'none',
-      } : {
-        opacity: '100%',
-        pointerEvents: 'auto',
-      }}
+    <main className="edit-level-page form-page">
+      <div
+        style={(showWarningModal) ? {
+          opacity: '50%',
+          pointerEvents: 'none',
+        } : {
+          opacity: '100%',
+          pointerEvents: 'auto',
+        }}
       >
         <LevelForm
           title={title}
@@ -98,23 +99,26 @@ function EditLevelPage() {
           setDescription={setDescription}
           setImgFile={setImgFile}
         />
-        <LevelEditor
-          imgUrl={preview}
-          targets={targets}
-          setTargets={setTargets}
-          levelId={level.id}
-        />
-        <div className="level-edit-buttons">
-          <button type="submit" onClick={editLevel}>Save</button>
-          <button
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              setShowWarningModal(true);
-            }}
-          >
-            Delete
-          </button>
+        <div className="second-half-form">
+          <LevelEditor
+            imgUrl={preview}
+            targets={targets}
+            setTargets={setTargets}
+            levelId={level.id}
+          />
+          <div className="level-edit-buttons">
+            <button type="submit" onClick={editLevel}>Save</button>
+            <button
+              className="delete-level-btn"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowWarningModal(true);
+              }}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
       {(showWarningModal) ? (
