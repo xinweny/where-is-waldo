@@ -38,7 +38,7 @@ function ScoresTable({
 
   return (
     <>
-      <table className="scores-table" cellSpacing="0">
+      <table className="scores-table">
         <thead>
           <tr>
             <th>Rank</th>

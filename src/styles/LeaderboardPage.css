@@ -9,6 +9,7 @@
 	align-items: flex-start;
 	gap: 8px;
 	padding: 16px;
+	background-color: rgb(219, 219, 219);
 }
 
 .leaderboard-page nav button {

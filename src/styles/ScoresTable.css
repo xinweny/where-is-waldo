@@ -12,7 +12,11 @@
 	font-size: 14px;
 }
 
-.scores-table tbody tr:nth-child(odd) {
+.scores-table thead {
+	text-transform: uppercase;
+}
+
+.scores-table tbody tr {
 	background-color: #e5e5e5;
 }
 
