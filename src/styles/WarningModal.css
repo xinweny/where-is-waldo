@@ -4,3 +4,17 @@
 	align-items: center;
 	justify-content: space-around;
 }
+
+.confirmation-btns > button.confirm-btn {
+	color: white;
+	padding: 4px 8px;
+	font-size: 14px;
+}
+
+.yes-btn {
+	background-color: rgb(165, 0, 0);
+}
+
+.no-btn {
+	background-color: rgb(0, 111, 0);
+}

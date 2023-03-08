@@ -13,8 +13,8 @@ function WarningModal({
       <h3>{header}</h3>
       <p>{message}</p>
       <div className="confirmation-btns">
-        <button type="button" className="yes-btn" onClick={action}>Yes</button>
-        <button type="button" className="no-btn" onClick={() => setShow(false)}>No</button>
+        <button type="button" className="yes-btn confirm-btn" onClick={action}>Yes</button>
+        <button type="button" className="no-btn confirm-btn" onClick={() => setShow(false)}>No</button>
       </div>
     </div>
   );
