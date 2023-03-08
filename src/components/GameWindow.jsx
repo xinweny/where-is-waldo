@@ -10,15 +10,14 @@ import '../styles/GameWindow.css';
 
 function GameWindow({
   level,
-  setFoundTargets,
-  foundTargets,
+  scale, setScale,
+  foundTargets, setFoundTargets,
   isGameInProgress,
 }) {
   const imgRef = useRef();
 
   const [fixedCoords, setFixedCoords] = useState([0, 0]);
   const [coords, setCoords] = useState([0, 0]);
-  const [scale, setScale] = useState(1);
   const [size, setSize] = useState([0, 0]);
   const [targetWindowStyle, setTargetWindowStyle] = useState({});
 
@@ -33,8 +32,7 @@ function GameWindow({
       const width = size[0] * scale;
       style.width = `${width}px`;
 
-      const height = size[1] * scale;
-      style.height = `${height}px`;
+      style.height = 'auto';
     }
 
     setCoords(scalePos(fixedCoords, scale));

@@ -14,6 +14,7 @@ function LevelPage() {
   const [isGameEnd, setIsGameEnd] = useState(false);
   const [startTime, setStartTime] = useState(null);
   const [duration, setDuration] = useState(0);
+  const [scale, setScale] = useState(1);
 
   const timerFunc = useRef(null);
 
@@ -41,12 +42,16 @@ function LevelPage() {
         targets={level.targets}
         foundTargets={foundTargets}
         duration={duration}
+        scale={scale}
+        setScale={setScale}
       />
       <div>
         <GameWindow
           level={level}
           setFoundTargets={setFoundTargets}
           foundTargets={foundTargets}
+          scale={scale}
+          setScale={setScale}
           isGameInProgress={startTime && !isGameEnd}
         />
         {(startTime) ? null : (

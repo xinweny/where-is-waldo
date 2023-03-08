@@ -2,10 +2,16 @@ import React from 'react';
 
 import TargetStatus from './TargetStatus';
 import Timer from './Timer';
+import ZoomInput from './ZoomInput';
 
 import '../styles/GamePanel.css';
 
-function GamePanel({ targets, foundTargets, duration }) {
+function GamePanel({
+  targets,
+  foundTargets,
+  duration,
+  scale, setScale,
+}) {
   return (
     <div className="game-panel">
       <div className="target-overview">
@@ -19,6 +25,7 @@ function GamePanel({ targets, foundTargets, duration }) {
         ))}
       </div>
       <Timer duration={duration} />
+      <ZoomInput scale={scale} setScale={setScale} />
     </div>
   );
 }

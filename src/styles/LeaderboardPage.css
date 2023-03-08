@@ -18,6 +18,10 @@
 	text-align: left;
 }
 
+.leaderboard-page nav .active {
+	font-weight: bold;
+}
+
 .leaderboard-content {
 	position: relative;
 	display: grid;

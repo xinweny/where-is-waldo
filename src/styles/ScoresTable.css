@@ -9,6 +9,7 @@
 
 .scores-table tbody, .scores-table thead {
 	background-color: white;
+	font-size: 14px;
 }
 
 .scores-table tbody tr:nth-child(odd) {

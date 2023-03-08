@@ -11,7 +11,7 @@ function HeaderNav({ isAdmin, handleSignOut }) {
   return (
     <nav>
       <Link to="/leaderboard">
-        <img className="icon" src={trophyIcon} alt="Leaderboard" />
+        <img className="icon" src={trophyIcon} title="Leaderboard" alt="Leaderboard" />
       </Link>
       <DropdownMenu>
         {isAdmin ? null : <Link to="/login">Login</Link>}
