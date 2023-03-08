@@ -14,7 +14,7 @@ function HeaderNav({ isAdmin, handleSignOut }) {
         <img className="icon" src={trophyIcon} title="Leaderboard" alt="Leaderboard" />
       </Link>
       <DropdownMenu>
-        {isAdmin ? null : <Link to="/login">Login</Link>}
+        {isAdmin ? null : <Link to="/login"><div><p>Admin Login</p></div></Link>}
         {isAdmin ? (
           <>
             <button type="button">

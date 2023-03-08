@@ -9,19 +9,3 @@
 .target-window button:not(:last-child) {
 	border-bottom: 1px solid #cdcdcd;
 }
-
-.target-select-btn {
-	font-weight: bold;
-}
-
-.target-select-btn > div {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	gap: 8px;
-}
-
-.target-select-btn .target-img-container {
-	width: 36px;
-	height: 36px;
-}
