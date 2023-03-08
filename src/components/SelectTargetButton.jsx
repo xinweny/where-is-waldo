@@ -3,11 +3,8 @@ import React, { useState, useEffect } from 'react';
 import '../styles/SelectTargetButton.css';
 
 function SelectTargetButton({
-  id,
   coords,
-  xRange,
-  yRange,
-  name,
+  target,
   setFoundTargets,
   foundTargets,
   setTargetWindowStyle,
@@ -15,19 +12,19 @@ function SelectTargetButton({
   const [style, setStyle] = useState({});
 
   useEffect(() => {
-    const display = (foundTargets.includes(id) ? 'none' : 'block');
+    const display = (foundTargets.includes(target.id) ? 'none' : 'block');
 
     setStyle((prev) => ({ ...prev, display }));
   }, [foundTargets]);
 
   const checkSelection = (e) => {
     e.stopPropagation();
-    if (coords[0] >= xRange[0]
-      && coords[0] <= xRange[1]
-      && coords[1] >= yRange[0]
-      && coords[1] <= yRange[1]
+    if (coords[0] >= target.xRange[0]
+      && coords[0] <= target.xRange[1]
+      && coords[1] >= target.yRange[0]
+      && coords[1] <= target.yRange[1]
     ) {
-      setFoundTargets((prev) => [...prev, id]);
+      setFoundTargets((prev) => [...prev, target.id]);
     }
 
     setTargetWindowStyle((prev) => ({ ...prev, display: 'none' }));
@@ -40,7 +37,12 @@ function SelectTargetButton({
       style={style}
       onClick={checkSelection}
     >
-      {name}
+      <div>
+        <div className="target-img-container">
+          <img src={target.imgUrl} alt="" />
+        </div>
+        <p>{target.name}</p>
+      </div>
     </button>
   );
 }

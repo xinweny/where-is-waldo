@@ -24,24 +24,29 @@ function LevelForm({
             onChange={(e) => setTitle(e.target.value)}
           />
         </label>
-        <label htmlFor="level-difficulty">
-          <p>{`Difficulty (${difficulty})`}</p>
-          <input
-            type="range"
-            id="level-difficulty"
-            min="1"
-            max="5"
-            step="1"
-            value={difficulty}
-            required
-            onChange={(e) => {
-              setDifficulty(Number(e.target.value));
-            }}
-          />
-        </label>
-        <ImageInput id="level-image" ref={useRef()} setImgFile={setImgFile} SVGComponent={ImgUploadSVG} />
+        <div>
+          <label htmlFor="level-difficulty" className="level-difficulty">
+            <p>Difficulty</p>
+            <div>
+              <input
+                type="range"
+                id="level-difficulty"
+                min="1"
+                max="5"
+                step="1"
+                value={difficulty}
+                required
+                onChange={(e) => {
+                  setDifficulty(Number(e.target.value));
+                }}
+              />
+              <p>{difficulty}</p>
+            </div>
+          </label>
+          <ImageInput id="level-image" ref={useRef()} setImgFile={setImgFile} SVGComponent={ImgUploadSVG} />
+        </div>
       </section>
-      <label htmlFor="level-description">
+      <label htmlFor="level-description" className="level-description">
         <p>Description</p>
         <textarea
           name="level-description"

@@ -7,7 +7,7 @@ const ImageInput = React.forwardRef(({
   setImgFile,
   SVGComponent,
 }, ref) => (
-  <label htmlFor={id} id="image-input">
+  <label htmlFor={id} className="image-input">
     <SVGComponent
       alt="Upload button"
       title="Upload image button"

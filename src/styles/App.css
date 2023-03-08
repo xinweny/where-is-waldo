@@ -5,6 +5,18 @@
 	grid-template-rows: auto 1fr auto;
 }
 
+input[type="text"], textarea {
+	all: unset;
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+	background-color: white;
+	padding: 4px 8px;
+}
+
+label > p {
+	font-weight: bold;
+}
+
 .target-img-container {
 	width: 50px;
 	height: 50px;

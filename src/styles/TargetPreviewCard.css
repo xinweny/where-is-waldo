@@ -21,7 +21,15 @@
 	display: block;
 }
 
+.target-preview {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
 .target-preview-card p {
 	font-size: 12px;
+	font-weight: bold;
 	text-align: center;
 }

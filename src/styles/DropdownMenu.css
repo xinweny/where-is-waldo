@@ -1,5 +1,5 @@
 .dropdown-content {
-	z-index: 1;
+	z-index: 5;
 	position: absolute;
 	top: 100%;
 	right: 0;

@@ -70,7 +70,7 @@ function TargetForm({
         </div>
         <ImageInput id="target-image" ref={targetImgFileRef} setImgFile={setTargetImgFile} SVGComponent={TargetImgUploadSVG} />
       </section>
-      <button type="submit" onClick={handleSubmit}>Add</button>
+      <button className="add-target-btn" type="submit" onClick={handleSubmit}>Add</button>
     </form>
   );
 }

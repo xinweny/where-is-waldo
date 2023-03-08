@@ -1,12 +1,13 @@
 .level-form {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
 	padding: 16px;
 	gap: 16px;
 }
 
 .level-form section {
 	display: flex;
+	flex-direction: column;
 	gap: 16px;
 }
 
@@ -15,8 +16,34 @@
 	font-weight: bold;
 }
 
+.level-form section > div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.level-difficulty {
+	display: grid;
+	grid-template-rows: auto 1fr;
+}
+
+.level-difficulty > div {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.level-description {
+	align-self: stretch;
+	flex: 1;
+	display: grid;
+	grid-template-rows: auto 1fr;
+}
+
 textarea#level-description {
-	width: 100%;
+	display: block;
 	white-space: pre-wrap;
 }
 

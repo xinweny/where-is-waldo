@@ -1,16 +1,24 @@
 .target-form {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 16px;
 }
 
 .target-form section {
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 	gap: 16px;
 }
 
 .coords-preview {
-	align-self: flex-end;
 	font-size: 12px;
+}
+
+.add-target-btn {
+	text-transform: uppercase;
+	font-weight: bold;
+	background-color: rgb(0, 0, 163);
+	color: white;
+	padding: 4px 8px;
+	border-radius: 16px;
 }

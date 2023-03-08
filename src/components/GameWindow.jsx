@@ -78,10 +78,7 @@ function GameWindow({
           {level.targets.map((target) => (
             <SelectTargetButton
               key={target.id}
-              id={target.id}
-              name={target.name}
-              xRange={target.xRange}
-              yRange={target.yRange}
+              target={target}
               coords={fixedCoords}
               foundTargets={foundTargets}
               setFoundTargets={setFoundTargets}
