@@ -9,4 +9,9 @@
 .level-info-modal button {
 	background-color: rgb(0, 0, 163);
 	color: white;
+	transition: var(--bg-col-transition);
+}
+
+.level-info-modal button:hover {
+	background-color: blue;
 }

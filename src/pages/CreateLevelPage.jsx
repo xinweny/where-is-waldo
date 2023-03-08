@@ -73,7 +73,7 @@ function CreateLevelPage() {
               levelId={id.current}
             />
             <div className="level-edit-buttons">
-              <button type="submit" onClick={handleSubmit}>Create</button>
+              <button className="create-level-btn" type="submit" onClick={handleSubmit}>Create</button>
             </div>
           </div>
         )

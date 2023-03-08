@@ -61,17 +61,19 @@ function GameEndModal({
       <form>
         <label htmlFor="player-name">
           <p>Name</p>
-          <p className="validation-msg">{validationMsg}</p>
-          <input
-            ref={inputNameRef}
-            type="text"
-            htmlFor="player-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            pattern="[A-Za-z0-9]+"
-            maxLength="36"
-            required
-          />
+          <div>
+            <p className="validation-msg">{validationMsg}</p>
+            <input
+              ref={inputNameRef}
+              type="text"
+              htmlFor="player-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              pattern="[A-Za-z0-9]+"
+              maxLength="36"
+              required
+            />
+          </div>
         </label>
         <button className="add-score-btn" type="submit" onClick={submitScore}>Add to Leaderboard</button>
       </form>

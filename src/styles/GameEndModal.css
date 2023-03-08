@@ -13,14 +13,35 @@
 	gap: 8px;
 }
 
+.game-end-modal label > div {
+	position: relative;
+}
+
+.validation-msg {
+	position: absolute;
+	font-size: 10px;
+	color: red;
+	bottom: 100%;
+}
+
 .game-end-modal button.add-score-btn {
 	font-size: 12px;
 	background-color: rgb(129, 0, 0);
 	color: white;
 	padding: 8px;
+	transition: var(--bg-col-transition);
+}
+
+.game-end-modal button.add-score-btn:hover {
+	background-color: red;
 }
 
 .restart-btn {
 	background-color: rgb(0, 0, 163);
 	color: white;
+	transition: var(--bg-col-transition);
+}
+
+.restart-btn:hover {
+	background-color: blue;
 }

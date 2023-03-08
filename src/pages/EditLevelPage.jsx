@@ -107,7 +107,7 @@ function EditLevelPage() {
             levelId={level.id}
           />
           <div className="level-edit-buttons">
-            <button type="submit" onClick={editLevel}>Save</button>
+            <button className="save-level-btn" type="submit" onClick={editLevel}>Save</button>
             <button
               className="delete-level-btn"
               type="submit"

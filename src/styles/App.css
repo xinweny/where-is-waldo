@@ -5,7 +5,7 @@
 	grid-template-rows: auto 1fr auto;
 }
 
-input[type="text"], textarea {
+input[type="text"], input[type="email"], input[type="password"], textarea {
 	all: unset;
   border: 1px solid #cdcdcd;
   border-radius: 8px;

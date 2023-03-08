@@ -72,7 +72,6 @@ textarea#level-description {
 }
 
 .level-edit-buttons button {
-	background-color: rgb(0, 111, 0);
 	color: white;
 	padding: 8px 16px;
 	border-radius: 24px;
@@ -81,6 +80,29 @@ textarea#level-description {
 	text-transform: uppercase;
 }
 
-.level-edit-buttons .delete-level-btn {
+.create-level-btn {
+	background-color: rgb(0, 0, 163);
+	transition: var(--bg-col-transition);
+}
+
+.create-level-btn:hover {
+	background-color: blue;
+}
+
+.save-level-btn {
+	background-color: rgb(0, 85, 0);
+	transition: var(--bg-col-transition);
+}
+
+.save-level-btn:hover {
+	background-color: green;
+}
+
+.delete-level-btn {
 	background-color: rgb(165, 0, 0);
+	transition: var(--bg-col-transition);
+}
+
+.delete-level-btn:hover {
+	background-color: red;
 }

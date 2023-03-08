@@ -1,0 +1,55 @@
+.admin-login-page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgb(219, 219, 219);
+}
+
+.admin-login-page > div {
+	background-color: white;
+	padding: 16px 24px;
+	border-radius: 16px;
+	width: 50%;
+	max-width: 500px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.admin-login-page h2 {
+	text-align: center;
+}
+
+.admin-login-page form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.admin-login-page label {
+	display: flex;
+	flex-direction: column;
+}
+
+.admin-login-page label p {
+	font-weight: normal;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+.admin-login-page input {
+	padding: 4px 8px;
+}
+
+.sign-in-btn {
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 8px 16px;
+	color: white;
+	background-color: rgb(72, 0, 72);
+	transition: var(--bg-col-transition);
+}
+
+.sign-in-btn:hover {
+	background-color: purple;
+}
