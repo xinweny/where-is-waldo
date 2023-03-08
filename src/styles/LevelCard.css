@@ -34,6 +34,7 @@
 
 .level-card-header h3 {
 	font-size: max(1em, 1.2vw);
+	font-weight: normal;
 }
 
 .stars svg {
