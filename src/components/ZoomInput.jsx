@@ -9,7 +9,7 @@ function ZoomInput({ scale, setScale }) {
         id="zoom-input"
         type="range"
         min="0.1"
-        max="2"
+        max="2.5"
         step="0.01"
         value={scale}
         onChange={(e) => setScale(Number(e.target.value))}

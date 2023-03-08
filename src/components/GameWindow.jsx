@@ -3,8 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useWindowResize } from '../utils/hooks';
 import { convertRelativePos, scalePos, unscalePos } from '../utils/helpers';
 
-import SelectTargetButton from './SelectTargetButton';
 import LevelImageContainer from './LevelImageContainer';
+import TargetWindow from './TargetWindow';
 
 import '../styles/GameWindow.css';
 
@@ -19,7 +19,6 @@ function GameWindow({
   const [fixedCoords, setFixedCoords] = useState([0, 0]);
   const [coords, setCoords] = useState([0, 0]);
   const [size, setSize] = useState([0, 0]);
-  const [targetWindowStyle, setTargetWindowStyle] = useState({});
 
   useWindowResize(imgRef, setScale);
 
@@ -37,16 +36,6 @@ function GameWindow({
 
     setCoords(scalePos(fixedCoords, scale));
   }, [scale]);
-
-  useEffect(() => {
-    if (fixedCoords.every((coord) => coord !== 0)) {
-      setTargetWindowStyle((prev) => ({
-        ...prev,
-        left: `${fixedCoords[0] * scale}px`,
-        top: `${fixedCoords[1] * scale}px`,
-      }));
-    }
-  }, [coords]);
 
   return (
     <div className={`game-window ${isGameInProgress ? '' : 'disabled'}`}>
@@ -66,24 +55,20 @@ function GameWindow({
           }}
           onClick={(e) => {
             if (isGameInProgress) {
-              setTargetWindowStyle({ display: 'block' });
               setCoords(convertRelativePos(e));
               setFixedCoords(unscalePos(convertRelativePos(e), scale));
             }
           }}
         />
-        <div className="target-window" style={targetWindowStyle}>
-          {level.targets.map((target) => (
-            <SelectTargetButton
-              key={target.id}
-              target={target}
-              coords={fixedCoords}
-              foundTargets={foundTargets}
-              setFoundTargets={setFoundTargets}
-              setTargetWindowStyle={setTargetWindowStyle}
-            />
-          ))}
-        </div>
+        <TargetWindow
+          coords={coords}
+          fixedCoords={fixedCoords}
+          level={level}
+          scale={scale}
+          foundTargets={foundTargets}
+          setFoundTargets={setFoundTargets}
+          imgRef={imgRef}
+        />
       </LevelImageContainer>
     </div>
   );
