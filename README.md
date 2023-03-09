@@ -10,6 +10,7 @@ Check out the live demo [here](https://hidden-in-plain-sight.web.app/) 👈🏻
 - Submit the fastest scores to the leaderboard
 - Profanity and offensive language filtering for names submitted to the leaderboard
 - Admin dashboard to create/edit levels and moderate leaderboard names
+- Select and drag functionality for specifying co-ordinate range of targets
 
 ## Technologies
 - ReactJS
