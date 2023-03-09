@@ -16,6 +16,10 @@ header {
 	text-shadow: 2px 2px 4px rgb(200, 200, 200);
 }
 
+.site-branding h1 {
+	font-size: min(2em, 4vw);
+}
+
 .site-branding img {
 	width: 48px;
 	height: auto;

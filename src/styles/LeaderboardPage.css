@@ -62,3 +62,32 @@
 	color: white;
 	text-shadow: 2px 2px 2px black;
 }
+
+@media (max-width: 600px) {
+	.leaderboard-page {
+		display: grid;
+		grid-template-rows: auto 1fr;
+		grid-template-columns: 1fr;
+		min-width: 0;
+		overflow-x: hidden;
+		width: 100vw;
+	}
+
+	.leaderboard-page nav {
+		flex-direction: row;
+		gap: 16px;
+		align-items: center;
+		justify-content: flex-start;
+		width: 100%;
+		overflow-x: scroll;
+		padding: 8px;
+	}
+
+	.leaderboard-page nav button {
+		flex-shrink: 0;
+		width: 75px;
+		font-size: 12px;
+		text-align: center;
+		min-width: min-content;
+	}
+}
