@@ -1,23 +1,30 @@
 .scores-table {
 	align-self: flex-start;
+	color: white;
 }
 
 .scores-table td, .scores-table th {
 	text-align: center;
-	padding: 4px;
+	padding: 8px;
 }
 
 .scores-table tbody, .scores-table thead {
-	background-color: white;
 	font-size: 14px;
+	font-weight: bold;
 }
 
 .scores-table thead {
 	text-transform: uppercase;
+	font-size: 16px;
+	background-color: rgb(0, 0, 0, 0.75);
 }
 
-.scores-table tbody tr {
-	background-color: #e5e5e5;
+.scores-table tbody {
+	background-color: rgb(0, 0, 0, 0.5);
+}
+
+.scores-table thead, .scores-table tr:not(:last-child) {
+	border-bottom: 1px solid white;
 }
 
 .score-cell {
